@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formaciones Boca Juniors</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Formaciones de Boca Juniors</h1>
+    <form id="formacionForm">
+      <input type="text" id="usuario" placeholder="Tu nombre" required />
+      <textarea id="jugadores" placeholder="Escribí tus 11 jugadores (uno por línea)" required></textarea>
+      <button type="submit">Enviar Formación</button>
+    </form>
+    <div id="formacionesContainer"></div>
+    <div id="equipoIdealContainer">
+      <h2>Equipo Ideal</h2>
+      <ol id="equipoIdeal"></ol>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
