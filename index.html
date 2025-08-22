@@ -1,25 +1,1166 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formaciones Boca Juniors</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>El 11 de Boca - Formación dinámica y votación</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EJ9L15DW36"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-EJ9L15DW36');
+</script>
+
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+  body {
+  background-color: #00215E;
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjRkZDQzAwIiBzdHJva2U9IiNGRkNDMDAiIHN0cm9rZS13aWR0aD0iMSIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBvbHlnb24gcG9pbnRzPSIxMiw yID E1IDkgMjIgOSAxNyAxNCAxOSAyMSAxMiAxNyA1IDIxIDcgMTQgMiA5IDkgOSIvPjwvc3ZnPg==');
+  background-repeat: repeat;
+  background-size: 190px 190px;
+  color: white;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0; padding: 0;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh;
+}
+
+  header {
+  background-color: #F5B041;
+  color: #00215E;
+  padding: 15px;
+  font-weight: 700;
+  font-size: 1.8em;
+  width: 100%;
+  text-align: center;
+
+  font-family: 'Impact', 'Arial Black', sans-serif
+}
+
+  #datos-partido {
+    background-color: #001B3D;
+    padding: 10px 20px;
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  #datos-partido input {
+    padding: 8px 12px;
+    font-size: 1em;
+    border-radius: 6px;
+    border: none;
+    width: 200px;
+    max-width: 100%;
+    font-weight: 500;
+  }
+  #datos-partido button {
+    background-color: #F5B041;
+    color: #00215E;
+    font-weight: 700;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #datos-partido button:hover {
+    background-color: #d59431;
+  }
+
+  #contenedor {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    margin: 20px;
+    max-width: 1100px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  #formacionSelector {
+    flex: 1;
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+  }
+  #formacionSelector label {
+    font-weight: 700;
+    font-size: 1.1em;
+  }
+  #formacionSelector select,
+  #formacionSelector input[type="text"] {
+    margin-top: 8px;
+    width: 100%;
+    font-size: 1em;
+    border-radius: 6px;
+    border: none;
+    padding: 8px;
+    font-weight: 500;
+    box-sizing: border-box;
+  }
+  #formacionSelector button {
+    margin-top: 12px;
+    width: 100%;
+    font-weight: 700;
+    padding: 12px;
+    background-color: #F5B041;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  #formacionSelector button:hover {
+    background-color: #d59431;
+  }
+  #formacionSelector button.firebase-btn {
+    background-color: #1A73E8;
+    color: white;
+  }
+  #formacionSelector button.firebase-btn:hover {
+    background-color: #155cb0;
+  }
+
+#cancha {
+  position: relative;
+  flex: 3;
+  background-color: #004400;
+  border: 3px solid #F5B041;
+  border-radius: 14px;
+  height: 480px;       /* altura reducida */
+  min-width: 480px;    /* ancho mínimo reducido */
+  box-shadow: 0 0 10px #F5B041;
+}
+
+#titulo-equipos { 
+  background-color: #003060;
+  color: #F5B041;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+
+.posicion {
+  position: absolute;
+  background-color: #F5B041;
+  color: #00215E;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.85em;
+  font-weight: 700;
+  width: auto;           /* ancho automático según el contenido */
+  min-width: 80px;       /* opcional, evita que se achique demasiado */
+  max-width: 180px;      /* opcional, limita extremos para no romper la cancha */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+  white-space: nowrap;   /* evita salto de línea */
+  text-align: center;    /* centra el texto */
+  transform: translate(-50%, -50%); /* mantiene centrado en la posición */
+}
+
+
+  .posicion label {
+    font-size: 0.75em;
+  }
+  select.jugador-select {
+    font-size: 0.85em;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 6px 8px;
+    font-weight: 500;
+  }
+
+  #equipos-enviados {
+    background-color: #001B3D;
+    padding: 20px 30px;
+    width: 100%;
+    max-width: 1100px;
+    box-sizing: border-box;
+    border-radius: 14px;
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  #equipos-enviados h2 {
+    color: #F5B041;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+
+  .equipo-container {
+    background-color: #003060;
+    border-radius: 12px;
+    padding: 15px 20px;
+    width: 320px;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px #F5B041AA;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-partido {
+  background-color: #0033a0; /* azul más intenso */
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+
+  /* Mini-cancha */
+.mini-cancha {
+    position: relative;
+    background: linear-gradient(90deg, #004080, #003060);
+    border: 2px solid #F5B041;
+    border-radius: 10px;
+    width: 300px;
+    height: 260px; /* Aumentamos altura */
+    margin-bottom: 15px;
+    box-shadow: 0 0 8px #F5B041AA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+}
+
+.mini-cancha .fila {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Aumentamos separación horizontal */
+    margin: 12px 0; /* Aumentamos separación vertical */
+}
+
+.mini-cancha .jugador {
+    background-color: #FFD700;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000;
+    box-shadow: 0 0 4px #00000088;
+}
+
+
+
+  .mini-posicion {
+  position: absolute;
+  background-color: #F5B041;
+  color: #00215E;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 0.7em;
+  font-weight: 700;
+  width: auto;
+  min-width: 60px;       /* opcional: para que no se achique demasiado */
+  max-width: 140px;      /* opcional: para limitar extremos */
+  box-sizing: border-box;
+  white-space: nowrap;   /* evita que el texto haga salto de línea */
+  overflow: visible;     /* permite que todo el texto se vea */
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+
+  .mini-posicion label {
+    display: none;
+}
+  .mini-posicion span {
+    display: block;
+    margin-top: 3px;
+  }
+
+  .botones-voto {
+    margin-top: 10px;
+    display: flex;
+    gap: 12px;
+  }
+  .botones-voto button {
+    background-color: #F5B041;
+    border: none;
+    color: #00215E;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+  }
+  .botones-voto button:hover:not(:disabled) {
+    background-color: #d59431;
+  }
+  .botones-voto button:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .votos {
+    margin-top: 5px;
+    font-size: 0.85em;
+  }
+
+  /* Estilos para 11 ideal */
+#once-ideal {
+  background-color: #001B3D;
+  width: 100%;
+  max-width: 1100px;
+  box-sizing: border-box;
+  border-radius: 14px;
+  margin-top: 40px;
+  padding: 20px 30px;
+}
+#once-ideal h2 {
+  color: #F5B041;
+  margin-top: 0;
+  margin-bottom: 25px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+#cancha-ideal {
+  position: relative;
+  background: linear-gradient(90deg, #004080, #003060);
+  border: 3px solid #F5B041;
+  border-radius: 14px;
+  height: 420px;
+  min-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 0 10px #F5B041;
+}
+.posicion-ideal {
+  position: absolute;
+  background-color: #F5B041;
+  color: #00215E;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  font-weight: 700;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+  box-shadow: 0 0 6px rgba(0,0,0,0.4);
+
+  /* Centrar el texto dentro de la caja */
+  align-items: center;
+  text-align: center;
+
+  /* Centrar la caja en la posición exacta */
+  transform: translate(-50%, -50%);
+}
+
+
+  .posicion-ideal label {
+    display: none;
+}
+  .posicion-ideal span {
+    font-weight: 600;
+  }
+
+  #equipos-firebase {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.equipo-container {
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  #equipos-firebase {
+    grid-template-columns: 1fr;
+  }
+}
+
+.boton-me-gusta {
+  background: linear-gradient(90deg, #0033A0 0%, #FFC72C 100%);
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+  user-select: none;
+}
+
+.boton-me-gusta:hover {
+  background: linear-gradient(90deg, #00277A 0%, #FFB800 100%);
+}
+
+.titulo-principal {
+  text-align: center;
+  margin-top: 15px;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+}
+
+.titulo-principal h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #06080a; /* Azul Boca */
+  text-shadow: 3px 3px 0 #fcbf00, 5px 5px 0 #000000; /* Amarillo y un toque de sombra negra */
+  letter-spacing: 2px;
+}
+
+.titulo-principal p {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #f7ae03; /* Amarillo Boca */
+  text-shadow: 2px 2px 0 #0033a0, 4px 4px 0 #000000; /* Azul y sombra negra */
+  letter-spacing: 1px;
+}
+
+.equipo-container {
+  background: #0033a0; /* Azul Boca */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  color: #ffcc00; /* Amarillo Boca */
+}
+
+.boton-compartir {
+  background-color: #F5B041;
+  color: #00215E;
+  border: none;
+  padding: 6px 12px;
+  margin-top: 6px;
+  font-weight: 700;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-compartir:hover {
+  background-color: #d59431;
+}
+
+</style>
+
+<!-- Google Fonts Roboto -->
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+<!-- Fuente Oswald desde Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" />
+
+<!-- Meta etiquetas para compartir con el mensaje personalizado -->
+<meta property="og:title" content="Armá y votá tu equipo ideal de Boca" />
+<meta property="og:description" content="Armá y votá tu equipo ideal de Boca" />
+<meta property="og:url" content="https://www.tuoncexeneize.com" />
+<meta property="og:type" content="website" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Armá y votá tu equipo ideal de Boca" />
+<meta name="twitter:description" content="Armá y votá tu equipo ideal de Boca" />
+
+
 </head>
+
+<!-- Al final del <body>, antes de </body> -->
+<footer style="text-align:center; padding: 10px; background-color: #002244; color: #FFD700; font-size: 14px;">
+  Contacto: 
+  <a href="https://x.com/tuoncexeneize" target="_blank" style="color: #FFD700; text-decoration: none;">
+    @tuoncexeneize
+  </a> en X
+</footer>
+
+
 <body>
-  <div class="container">
-    <h1>Formaciones de Boca Juniors</h1>
-    <form id="formacionForm">
-      <input type="text" id="usuario" placeholder="Tu nombre" required />
-      <textarea id="jugadores" placeholder="Escribí tus 11 jugadores (uno por línea)" required></textarea>
-      <button type="submit">Enviar Formación</button>
-    </form>
-    <div id="formacionesContainer"></div>
-    <div id="equipoIdealContainer">
-      <h2>Equipo Ideal</h2>
-      <ol id="equipoIdeal"></ol>
-    </div>
+
+<div class="titulo-principal">
+  <h1></h1>
+  <p></p>
+</div>
+
+
+<header>TU 11 XENEIZE        -     Armá y votá tu equipo ideal</header>
+
+<div style="display: flex; gap: 10px; margin-top: 20px;">
+  <button onclick="shareTwitter()" style="background:#1DA1F2; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;">
+    Compartir en Twitter
+  </button>
+  <button onclick="shareWhatsApp()" style="background:#25D366; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;">
+    Compartir en WhatsApp
+  </button>
+</div>
+
+
+<!-- Datos del partido -->
+
+<div id="info-partido-seleccionado" style="margin-top:10px; color:#F5B041; font-weight:bold;"></div>
+
+
+
+<div id="contenedor">
+  <div id="formacionSelector">
+    <label for="formaciones">Formación:</label>
+    <select id="formaciones" onchange="renderizarCancha()">
+      <option value="">-- Selecciona --</option>
+      <option value="4-3-3">4-3-3</option>
+      <option value="4-4-2">4-4-2</option>
+      <option value="5-4-1">5-4-1</option>
+      <option value="4-3-1-2">4-3-1-2</option>
+      <option value="4-2-3-1">4-2-3-1</option>
+      <option value="3-4-3">3-4-3</option>
+      <option value="5-3-2">5-3-2</option>
+      <option value="3-5-2">3-5-2</option>
+    </select>
+
+    <label for="nickname" style="margin-top:12px;">Ayudante de Campo:</label>
+<input type="text" id="nickname" placeholder="Nombre" />
+
+
+    <button class="firebase-btn" onclick="enviarEquipoFirebase()">Enviar Equipo</button>
   </div>
-  <script src="script.js"></script>
+  <div id="cancha"></div>
+</div>
+
+<!-- 11 Ideal -->
+<div id="once-ideal" style="display:none;">
+  <h2>11 Ideal (Equipo más votado)</h2>
+
+  <div id="datos-proximo-partido" class="info-partido">
+    <strong>Rival:</strong> Banfield <br />
+    <strong>Estadio:</strong> La Bombonera <br />
+    <strong>Fecha:</strong> 25/08 18:15 hs
+  </div>
+
+  <div id="cancha-ideal"></div>
+</div>
+
+
+<h2 id="titulo-equipos">EQUIPOS ENVIADOS</h2>
+<div id="equipos-firebase"></div>
+
+
+
+<script>
+  const jugadores = {
+    ARQ: [
+      "Agustin Marchesin",
+      "Leandro Brey",
+      "Sergio Romero",
+      "Javier Garcia"
+    ],
+    DEF: [
+      "Luis Advincula", "Lucas Blondel", "Juan Barinaga",
+      "Rodrigo Battaglia", "Nicolas Figal", "Lautaro Di Lollo", "Marco Pellegrino", "Ayrton Costa",
+      "Rodrigo Battaglia ",
+      "Lautaro Blanco", "Frank Fabra", "Marcelo Saracchi", "Malcom Braida"
+    ],
+    VOL: [
+      "Leandro Paredes", "Milton Delgado", "Tomas Belmonte", "Rodrigo Battaglia",
+      "Williams Alarcon", "Ignacio Miramon", "Camilo Rey Domenech", "Agustin Martegani", "Ander Herrera",
+      "Carlos Palacios ", "Kevin Zenon", "Brian Aguirre", "Alan Velasco", "Lautaro Blanco", "Frank Fabra", 
+      "Ezequiel Zeballos", "Lucas Janson", "Malcom Braida", "Lucas Blondel", "Juan Barinaga",
+      "Luis Advincula", "Miguel Merentiel"
+    ],
+    DEL: [
+      "Carlos Palacios ", "Edinson Cavani", "Miguel Merentiel", "Milton Gimenez",
+      "Kevin Zenon", "Brian Aguirre", "Alan Velasco", "Ezequiel Zeballos",
+      "Lucas Janson", "Malcom Braida"
+    ]
+  };
+
+  const formaciones = {
+    "4-3-3": [
+      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+      { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
+      { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
+      { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
+      { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 30 },
+      { label: "VOL 2", tipo: "VOL", top: 50, left: 50 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 70 },
+      { label: "DEL 1", tipo: "DEL", top: 25, left: 25 },
+      { label: "DEL 2", tipo: "DEL", top: 25, left: 50 },
+      { label: "DEL 3", tipo: "DEL", top: 25, left: 75 },
+    ],
+    "4-4-2": [
+      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+      { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
+      { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
+      { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
+      { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 20 },
+      { label: "VOL 2", tipo: "VOL", top: 50, left: 40 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 60 },
+      { label: "VOL 4", tipo: "VOL", top: 50, left: 80 },
+      { label: "DEL 1", tipo: "DEL", top: 25, left: 35 },
+      { label: "DEL 2", tipo: "DEL", top: 25, left: 65 },
+    ],
+    "5-4-1": [
+      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+      { label: "DEF 1", tipo: "DEF", top: 70, left: 10 },
+      { label: "DEF 2", tipo: "DEF", top: 70, left: 30 },
+      { label: "DEF 3", tipo: "DEF", top: 70, left: 50 },
+      { label: "DEF 4", tipo: "DEF", top: 70, left: 70 },
+      { label: "DEF 5", tipo: "DEF", top: 70, left: 90 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 25 },
+      { label: "VOL 2", tipo: "VOL", top: 50, left: 45 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 65 },
+      { label: "VOL 4", tipo: "VOL", top: 50, left: 85 },
+      { label: "DEL 1", tipo: "DEL", top: 25, left: 50 },
+    ],
+    "4-3-1-2": [
+      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+      { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
+      { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
+      { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
+      { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 30 },
+      { label: "VOL 2", tipo: "VOL", top: 50, left: 50 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 70 },
+      { label: "VOL 4", tipo: "VOL", top: 30, left: 50 }, // El 1 volante ofensivo
+      { label: "DEL 1", tipo: "DEL", top: 25, left: 35 },
+      { label: "DEL 2", tipo: "DEL", top: 25, left: 65 },
+    ],
+    "4-2-3-1": [
+     { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+     { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
+     { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
+     { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
+     { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
+     { label: "VOL 1", tipo: "VOL", top: 55, left: 35 },
+     { label: "VOL 2", tipo: "VOL", top: 55, left: 65 },
+     { label: "VOL 3", tipo: "VOL", top: 40, left: 25 },
+     { label: "VOL 4", tipo: "VOL", top: 40, left: 50 },
+     { label: "VOL 5", tipo: "VOL", top: 40, left: 75 },
+     { label: "DEL 1", tipo: "DEL", top: 20, left: 50 }
+    ],
+    "3-4-3": [
+     { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+     { label: "DEF 1", tipo: "DEF", top: 70, left: 35 },
+     { label: "DEF 2", tipo: "DEF", top: 70, left: 50 },
+     { label: "DEF 3", tipo: "DEF", top: 70, left: 65 },
+     { label: "VOL 1", tipo: "VOL", top: 50, left: 20 },
+     { label: "VOL 2", tipo: "VOL", top: 50, left: 40 },
+     { label: "VOL 3", tipo: "VOL", top: 50, left: 60 },
+     { label: "VOL 4", tipo: "VOL", top: 50, left: 80 },
+     { label: "DEL 1", tipo: "DEL", top: 25, left: 30 },
+     { label: "DEL 2", tipo: "DEL", top: 25, left: 50 },
+     { label: "DEL 3", tipo: "DEL", top: 25, left: 70 }
+     ],
+     "5-3-2": [
+     { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+     { label: "DEF 1", tipo: "DEF", top: 70, left: 15 },
+     { label: "DEF 2", tipo: "DEF", top: 70, left: 30 },
+     { label: "DEF 3", tipo: "DEF", top: 70, left: 50 },
+     { label: "DEF 4", tipo: "DEF", top: 70, left: 70 },
+     { label: "DEF 5", tipo: "DEF", top: 70, left: 85 },
+     { label: "VOL 1", tipo: "VOL", top: 50, left: 35 },
+     { label: "VOL 2", tipo: "VOL", top: 50, left: 50 },
+     { label: "VOL 3", tipo: "VOL", top: 50, left: 65 },
+     { label: "DEL 1", tipo: "DEL", top: 25, left: 40 },
+     { label: "DEL 2", tipo: "DEL", top: 25, left: 60 }
+     ],
+     "3-5-2": [
+     { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
+     { label: "DEF 1", tipo: "DEF", top: 70, left: 35 },
+     { label: "DEF 2", tipo: "DEF", top: 70, left: 50 },
+     { label: "DEF 3", tipo: "DEF", top: 70, left: 65 },
+     { label: "VOL 1", tipo: "VOL", top: 50, left: 15 },
+     { label: "VOL 2", tipo: "VOL", top: 50, left: 35 },
+     { label: "VOL 3", tipo: "VOL", top: 55, left: 50 },
+     { label: "VOL 4", tipo: "VOL", top: 50, left: 65 },
+     { label: "VOL 5", tipo: "VOL", top: 50, left: 85 },
+     { label: "DEL 1", tipo: "DEL", top: 25, left: 40 },
+     { label: "DEL 2", tipo: "DEL", top: 25, left: 60 }
+    ]
+
+};
+
+  function renderizarCancha() {
+    const formacion = document.getElementById("formaciones").value;
+    const cancha = document.getElementById("cancha");
+    cancha.innerHTML = "";
+
+    if (!formacion) return;
+
+    const posiciones = formaciones[formacion];
+    if (!posiciones) return;
+
+    posiciones.forEach((pos, idx) => {
+      const divPos = document.createElement("div");
+      divPos.className = "posicion";
+      divPos.style.top = pos.top + "%";
+      divPos.style.left = pos.left + "%";
+
+      // Label posición
+      const label = document.createElement("label");
+      label.textContent = pos.label;
+      divPos.appendChild(label);
+
+      // Select jugador
+      const select = document.createElement("select");
+      select.className = "jugador-select";
+      select.dataset.tipo = pos.tipo;
+      select.id = "posicion-" + idx;
+
+      const optionDefault = document.createElement("option");
+      optionDefault.value = "";
+      optionDefault.textContent = "Elegir jugador";
+      select.appendChild(optionDefault);
+
+      // Lista jugadores según tipo
+      const listaJugadores = jugadores[pos.tipo] || [];
+      listaJugadores.forEach((jug) => {
+        const opt = document.createElement("option");
+        opt.value = jug;
+        opt.textContent = jug;
+        select.appendChild(opt);
+      });
+
+      divPos.appendChild(select);
+      cancha.appendChild(divPos);
+    });
+  }
+
+  function enviarEquipo() {
+    const nickname = document.getElementById("nickname").value.trim();
+    if (!nickname) {
+      alert("Por favor ingresá tu nickname.");
+      return;
+    }
+    const formacion = document.getElementById("formaciones").value;
+    if (!formacion) {
+      alert("Por favor seleccioná una formación.");
+      return;
+    }
+    const selects = document.querySelectorAll("#cancha select.jugador-select");
+    if (selects.length === 0) {
+      alert("Primero seleccioná los jugadores en la formación.");
+      return;
+    }
+    const jugadoresSeleccionados = [];
+    for (const select of selects) {
+      if (!select.value) {
+        alert("Por favor elegí un jugador para cada posición.");
+        return;
+      }
+      jugadoresSeleccionados.push(select.value);
+    }
+
+    // Guardar localStorage
+    const equiposGuardados = JSON.parse(localStorage.getItem("equipos")) || [];
+    equiposGuardados.push({
+      nickname,
+      formacion,
+      jugadores: jugadoresSeleccionados,
+      timestamp: new Date().toISOString()
+    });
+    localStorage.setItem("equipos", JSON.stringify(equiposGuardados));
+    alert("✅ Equipo guardado localmente.");
+    mostrarEquiposLocal();
+  }
+
+  function mostrarEquiposLocal() {
+    const lista = document.getElementById("lista-equipos-prueba");
+    lista.innerHTML = "";
+    const equiposGuardados = JSON.parse(localStorage.getItem("equipos")) || [];
+    equiposGuardados.forEach((equipo, idx) => {
+      const divEquipo = document.createElement("div");
+      divEquipo.className = "equipo-container";
+
+      divEquipo.innerHTML = `
+        <div class="info-partido">
+          <strong>Nickname:</strong> ${equipo.nickname} <br />
+          <strong>Formación:</strong> ${equipo.formacion} <br />
+          <small style="font-weight:400; font-size:0.8em;">
+            ${new Date(equipo.timestamp).toLocaleString()}
+          </small>
+        </div>
+        <div class="mini-cancha" style="position:relative; height:220px;">
+          ${equipo.jugadores.map((jugador, i) => {
+            // Posicionar según la formación y la posición
+            const formacion = formaciones[equipo.formacion];
+            if (!formacion) return "";
+            const pos = formacion[i];
+            if (!pos) return "";
+            return `<div class="mini-posicion" style="top:${pos.top}%; left:${pos.left}%;">
+              <label>${pos.label}</label><span>${jugador}</span>
+            </div>`;
+          }).join('')}
+        </div>
+      `;
+      lista.appendChild(divEquipo);
+    });
+  }
+
+  function guardarDatosPartido() {
+    const rival = document.getElementById("rival").value.trim();
+    const estadio = document.getElementById("estadio").value.trim();
+    const fecha = document.getElementById("fecha").value;
+
+    if (!rival || !estadio || !fecha) {
+      alert("Por favor completá todos los datos del partido.");
+      return;
+    }
+
+    localStorage.setItem("datosPartido", JSON.stringify({ rival, estadio, fecha }));
+    alert("Datos del partido guardados.");
+  }
+
+  // Al cargar la página, cargo datos guardados y equipos
+  window.onload = () => {
+    // Cargar datos partido
+    const datosPartido = JSON.parse(localStorage.getItem("datosPartido"));
+    if (datosPartido) {
+      document.getElementById("rival").value = datosPartido.rival;
+      document.getElementById("estadio").value = datosPartido.estadio;
+      document.getElementById("fecha").value = datosPartido.fecha;
+    }
+    mostrarEquiposLocal();
+  };
+</script>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// --- Paso 1: helpers para recordar votos en este navegador ---
+const VOTOS_LS_KEY = "equiposVotados";
+
+function getVotedList() {
+  try {
+    return JSON.parse(localStorage.getItem(VOTOS_LS_KEY)) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function hasVoted(idEquipo) {
+  if (!idEquipo) return false;
+  return getVotedList().includes(idEquipo);
+}
+
+function markVoted(idEquipo) {
+  if (!idEquipo) return;
+  const arr = getVotedList();
+  if (!arr.includes(idEquipo)) {
+    arr.push(idEquipo);
+    localStorage.setItem(VOTOS_LS_KEY, JSON.stringify(arr));
+  }
+}
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBEXNvtQPci2sx4_a3JSDt6S2YDW4Qs9RE",
+  authDomain: "el11deboca.firebaseapp.com",
+  projectId: "el11deboca",
+  storageBucket: "el11deboca.firebasestorage.app",
+  messagingSenderId: "275338094752",
+  appId: "1:275338094752:web:2275f85837deb1127b41c5",
+  measurementId: "G-XCG9CRTZEB"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+function mostrarEquiposFirebase(equipos) {
+  const contenedor = document.getElementById("equipos-firebase");
+  contenedor.innerHTML = "";
+
+  // Ordenar equipos por votos descendente
+  equipos.sort((a, b) => (b.votos || 0) - (a.votos || 0));
+
+  const reemplazos = {
+    "Carlos Palacios D": "Palacios",
+    "Carlos Palacios V": "Palacios",
+    "Rodrigo Battaglia": "Battaglia",
+    "Rodrigo Battaglia V": "Battaglia",
+    "Rodrigo Battaglia D": "Battaglia",
+    "Lautaro Di Lollo": "Di Lollo",
+  };
+
+  equipos.forEach((equipo) => {
+    const div = document.createElement("div");
+    div.className = "equipo-container";
+    div.style.marginBottom = "1rem";
+
+    const nombre = equipo.nickname || "Anónimo";
+
+    div.innerHTML = `
+      <div class="info-partido">
+        <strong>Ayudante de Campo:</strong> ${nombre} <br />
+        <strong>Formación:</strong> ${equipo.formacion || "No definida"} <br />
+        </small>
+      </div>
+      <div class="mini-cancha" style="position:relative; height:220px;">
+  ${equipo.jugadores && equipo.formacion && formaciones[equipo.formacion]
+    ? equipo.jugadores.map((jugador, i) => {
+        const pos = formaciones[equipo.formacion][i];
+        if (!pos) return "";
+
+        let apellido = jugador;
+        if (reemplazos[jugador]) apellido = reemplazos[jugador];
+        else {
+          const partes = jugador.trim().split(" ");
+          apellido = partes[partes.length - 1];
+        }
+
+        // Ajustar top según la línea del jugador
+        let topPos = pos.top; // valor original
+        const label = pos.label.toLowerCase();
+
+        if (label.includes("delantero")) {
+          topPos -= 10; // mover delanteros más arriba
+          if(topPos < 0) topPos = 0; // no salir de la cancha
+        } else if(label.includes("mediocampista")) {
+          topPos -= 5; // opcional, un poco más arriba
+          if(topPos < 0) topPos = 0;
+        } 
+        // defensores y arquero mantienen top original
+
+        return `<div class="mini-posicion" style="top:${topPos}%; left:${pos.left}%;"><label>${pos.label}</label><span>${apellido}</span></div>`;
+      }).join("")
+    : "<em>Formación o jugadores incompletos</em>"}
+</div>
+
+
+
+      <button class="boton-me-gusta" data-id="${equipo.id}">
+        👍 Me gusta (${equipo.votos || 0})
+      </button>
+    `;
+
+    // Botón Me gusta
+    const btn = div.querySelector(".boton-me-gusta");
+    btn.addEventListener("click", async () => {
+      if (!equipo.id) {
+        alert("Error: No se puede votar este equipo");
+        return;
+      }
+
+      const votosPrevios = JSON.parse(localStorage.getItem("equiposVotados") || "[]");
+      if (votosPrevios.includes(equipo.id)) {
+        alert("⚠️ Ya votaste este equipo.");
+        return;
+      }
+
+      const docRef = doc(db, "equipos", equipo.id);
+      try {
+        await updateDoc(docRef, { votos: (equipo.votos || 0) + 1 });
+        votosPrevios.push(equipo.id);
+        localStorage.setItem("equiposVotados", JSON.stringify(votosPrevios));
+        alert(`¡Votaste por el equipo de ${nombre}!`);
+      } catch (error) {
+        alert("Error al votar: " + error.message);
+        console.error(error);
+      }
+    });
+
+    // --- BOTÓN COMPARTIR ---
+    const btnCompartir = document.createElement("button");
+    btnCompartir.textContent = "📸 Compartir este equipo";
+    btnCompartir.classList.add("boton-compartir");
+
+    btnCompartir.addEventListener("click", () => {
+      html2canvas(div, { scale: 2 }).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const a = document.createElement('a');
+        a.href = imgData;
+        a.download = "mi_equipo.png";
+        a.click();
+      });
+    });
+
+    div.appendChild(btnCompartir);
+
+    // Agregar div al contenedor
+    contenedor.appendChild(div);
+  });
+}
+
+
+
+
+function mostrarOnceIdeal(equipos) {
+  const contenedor = document.getElementById("once-ideal");
+  const canchaIdeal = document.getElementById("cancha-ideal");
+
+  if (!equipos.length) {
+    contenedor.style.display = "none";
+    return;
+  }
+
+  // Buscar el equipo con más votos
+  let equipoTop = null;
+  let maxVotos = -1;
+  equipos.forEach(equipo => {
+    if ((equipo.votos || 0) > maxVotos) {
+      maxVotos = equipo.votos || 0;
+      equipoTop = equipo;
+    }
+  });
+
+  if (!equipoTop || !equipoTop.jugadores || !equipoTop.formacion) {
+    contenedor.style.display = "none";
+    return;
+  }
+
+  canchaIdeal.innerHTML = ""; // limpio antes
+
+  const posicionesBase = formaciones[equipoTop.formacion];
+  if (!posicionesBase) {
+    contenedor.style.display = "none";
+    return;
+  }
+
+  // Función para obtener apellido, con excepciones
+  const obtenerApellido = (nombreCompleto) => {
+    const excepciones = ["Palacios", "Battaglia", "Di Lollo"];
+    for (let excep of excepciones) {
+      if (nombreCompleto.includes(excep)) return excep;
+    }
+    return nombreCompleto.split(" ").pop();
+  };
+
+  equipoTop.jugadores.forEach((jugador, i) => {
+    const pos = posicionesBase[i];
+    if (!pos) return;
+
+    const divPos = document.createElement("div");
+    divPos.className = "posicion-ideal";
+    divPos.style.top = pos.top + "%";
+    divPos.style.left = pos.left + "%";
+    divPos.innerHTML = `<label>${pos.label}</label><span>${obtenerApellido(jugador)}</span>`;
+
+    canchaIdeal.appendChild(divPos);
+  });
+
+  // Mostrar título con el nombre del equipo más votado
+  let tituloTop = document.getElementById("nombre-equipo-top");
+  if (!tituloTop) {
+    tituloTop = document.createElement("h3");
+    tituloTop.id = "nombre-equipo-top";
+    tituloTop.style.textAlign = "center";
+    tituloTop.style.marginBottom = "0.5rem";
+    contenedor.insertBefore(tituloTop, canchaIdeal);
+  }
+  tituloTop.textContent = `Equipo más votado: ${equipoTop.nickname || "Anónimo"} (${maxVotos} votos)`;
+
+  contenedor.style.display = "block";
+}
+
+
+const q = query(collection(db, "equipos"), orderBy("timestamp", "desc"));
+onSnapshot(q, (snapshot) => {
+  const equipos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  mostrarEquiposFirebase(equipos);
+  mostrarOnceIdeal(equipos); 
+});
+
+window.enviarEquipoFirebase = async () => {
+  
+
+  const nickname = document.getElementById("nickname").value.trim();
+  const formacion = document.getElementById("formaciones").value;
+
+  if (!nickname) {
+    alert("Por favor ingresá tu nickname.");
+    return;
+  }
+  if (!formacion) {
+    alert("Por favor seleccioná una formación.");
+    return;
+  }
+
+  const selects = document.querySelectorAll("#cancha select.jugador-select");
+  if (selects.length === 0) {
+    alert("Primero seleccioná los jugadores en la formación.");
+    return;
+  }
+
+  const jugadoresSeleccionados = [];
+  for (const select of selects) {
+    if (!select.value) {
+      alert("Por favor elegí un jugador para cada posición.");
+      return;
+    }
+    if (jugadoresSeleccionados.includes(select.value)) {
+    alert(`⚠️ El jugador "${select.value}" ya fue elegido en otra posición.`);
+    return;
+    }
+    jugadoresSeleccionados.push(select.value);
+  }
+
+  try {
+    await addDoc(collection(db, "equipos"), {
+      nickname,
+      formacion,
+      jugadores: jugadoresSeleccionados,
+      timestamp: new Date(),
+      votos: 0,
+    });
+
+
+    alert("✅ Equipo enviado correctamente a la nube.");
+  } catch (error) {
+    alert("❌ Error al guardar el equipo en la nube: " + error.message);
+    console.error("Firebase error:", error);
+  }
+};
+
+  window.shareTwitter = function() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent("Mirá esta página increíble!");
+  const twitterUrl = `https://twitter.com/intent/tweet?url=${url}&text=${text}`;
+  window.open(twitterUrl, "_blank");
+}
+
+window.shareWhatsApp = function() {
+  const url = encodeURIComponent(window.location.href);
+  const text = encodeURIComponent("Mirá esta página increíble!");
+  const waUrl = `https://api.whatsapp.com/send?text=${text}%20${url}`;
+  window.open(waUrl, "_blank");
+}
+
+
+</script>
+
+
+
+
+
 </body>
 </html>
+
+
+
