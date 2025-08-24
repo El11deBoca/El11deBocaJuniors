@@ -509,7 +509,7 @@
 </div>
 
 
-<header>TU 11 XENEIZE        -     Armá y votá tu equipo ideal- HOLA HICE ESTE CAMBIO</header>
+<header>TU 11 XENEIZE        -     Armá y votá tu equipo ideal- </header>
 
 <div style="display: flex; gap: 10px; margin-top: 20px;">
   <button onclick="shareTwitter()" style="background:#1DA1F2; color:white; border:none; padding:10px 15px; border-radius:5px; cursor:pointer;">
@@ -555,16 +555,79 @@
 <div id="once-ideal" style="display:none;">
   <h2>11 Ideal (Equipo más votado)</h2>
 
+  <!-- Datos del próximo partido -->
   <div id="datos-proximo-partido" class="info-partido">
-    <strong>Rival:</strong> Banfield <br />
-    <strong>Estadio:</strong> La Bombonera <br />
-    <strong>Fecha:</strong> 25/08 18:15 hs
+    Cargando datos del partido...
   </div>
 
   <div id="cancha-ideal"></div>
 </div>
 
+<!-- Script para cargar datos del próximo partido -->
+<script type="module">
+import { obtenerProximoPartido } from "./proximoPartido.js";
 
+async function cargarDatosPartido() {
+  try {
+    const partido = await obtenerProximoPartido();
+
+    // Actualizar info del partido
+    const infoDiv = document.getElementById("info-partido-seleccionado");
+    if (infoDiv) {
+      infoDiv.innerHTML = `
+        <strong>Rival:</strong> ${partido.rival} <br />
+        <strong>Estadio:</strong> ${partido.estadio} <br />
+        <strong>Fecha:</strong> ${partido.fecha} ${partido.hora} <br />
+        <strong>Competición:</strong> ${partido.competicion}
+      `;
+    }
+
+    const datosDiv = document.getElementById("datos-proximo-partido");
+    if (datosDiv) {
+      datosDiv.innerHTML = `
+        <strong>Rival:</strong> ${partido.rival} <br />
+        <strong>Estadio:</strong> ${partido.estadio} <br />
+        <strong>Fecha:</strong> ${partido.fecha} ${partido.hora} <br />
+        <strong>Competición:</strong> ${partido.competicion}
+      `;
+    }
+
+    // Guardar local para recargas
+    localStorage.setItem("datosPartido", JSON.stringify(partido));
+  } catch (err) {
+    console.error("Error cargando próximo partido:", err);
+    const infoDiv = document.getElementById("info-partido-seleccionado");
+    const datosDiv = document.getElementById("datos-proximo-partido");
+    if (infoDiv) infoDiv.innerText = "No se pudo cargar el próximo partido.";
+    if (datosDiv) datosDiv.innerText = "No se pudo cargar el próximo partido.";
+  }
+}
+
+// Al cargar la página, mostrar datos guardados o cargar desde API
+window.addEventListener("DOMContentLoaded", async () => {
+  const datosPartido = JSON.parse(localStorage.getItem("datosPartido"));
+  if (datosPartido) {
+    const infoDiv = document.getElementById("info-partido-seleccionado");
+    const datosDiv = document.getElementById("datos-proximo-partido");
+    if (infoDiv) infoDiv.innerHTML = `
+      <strong>Rival:</strong> ${datosPartido.rival} <br />
+      <strong>Estadio:</strong> ${datosPartido.estadio} <br />
+      <strong>Fecha:</strong> ${datosPartido.fecha} ${datosPartido.hora} <br />
+      <strong>Competición:</strong> ${datosPartido.competicion}
+    `;
+    if (datosDiv) datosDiv.innerHTML = infoDiv.innerHTML;
+  } else {
+    await cargarDatosPartido();
+  }
+
+  // Mostrar equipos guardados localmente
+  if (typeof mostrarEquiposLocal === "function") {
+    mostrarEquiposLocal();
+  }
+});
+</script>
+
+<!-- Equipos enviados -->
 <h2 id="titulo-equipos">EQUIPOS ENVIADOS</h2>
 <div id="equipos-firebase"></div>
 
