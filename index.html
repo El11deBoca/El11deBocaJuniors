@@ -114,58 +114,6 @@
 </div>
 
 <!-- Script para cargar datos del próximo partido -->
-<script type="module">
-  import { obtenerProximoPartido } from "./proximoPartido.js";
-
-  // Función para mostrar los datos en el HTML
-  function mostrarDatosPartido(partido) {
-    const datosDiv = document.getElementById("datos-proximo-partido");
-    if (!datosDiv) return;
-
-    if (partido) {
-      datosDiv.innerHTML = `
-        <strong>Rival:</strong> ${partido.rival} <br />
-        <strong>Estadio:</strong> ${partido.estadio} <br />
-        <strong>Fecha:</strong> ${partido.fecha} ${partido.hora} <br />
-        <strong>Competición:</strong> ${partido.competicion}
-      `;
-    } else {
-      datosDiv.innerText = "No se pudo cargar el próximo partido.";
-    }
-  }
-
-  // Función principal para cargar datos
-  async function cargarDatosPartido() {
-    try {
-      const partido = await obtenerProximoPartido();
-      mostrarDatosPartido(partido);
-
-      // Guardar en localStorage para futuras visitas
-      if (partido) {
-        localStorage.setItem("datosPartido", JSON.stringify(partido));
-      }
-    } catch (err) {
-      console.error("Error cargando próximo partido:", err);
-      mostrarDatosPartido(null);
-    }
-  }
-
-  // Al cargar la página
-  window.addEventListener("DOMContentLoaded", async () => {
-    const datosGuardados = JSON.parse(localStorage.getItem("datosPartido"));
-
-    if (datosGuardados) {
-      mostrarDatosPartido(datosGuardados);
-    } else {
-      await cargarDatosPartido();
-  }
-
-  // Mostrar equipos guardados localmente
-  if (typeof mostrarEquiposLocal === "function") {
-    mostrarEquiposLocal();
-  }
-});
-</script>
 
 <!-- Equipos enviados -->
 <h2 id="titulo-equipos">EQUIPOS ENVIADOS</h2>
@@ -761,7 +709,7 @@ window.shareWhatsApp = function() {
 
 
 
-
+<script type="module" src="index.js"></script>
 </body>
 </html>
 
