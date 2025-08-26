@@ -1,7 +1,9 @@
 // proximoPartido.js
 const traduccionesCompeticion = {
-  "Argentine Primera Division": "Primera División Argentina",
+  "Argentinian Primera Division": "Primera División Argentina",
   "Copa Argentina": "Copa Argentina",
+  "Argentinian cup": "Copa Argentina",
+  "Argentinian Copa de la Liga Profesional": "Copa de la Liga Argentina",
   "Supercopa Argentina": "Supercopa Argentina",
   "Copa Libertadores": "Copa Libertadores",
   "Copa Sudamericana": "Copa Sudamericana",
