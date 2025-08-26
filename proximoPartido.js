@@ -1,40 +1,39 @@
-// proximoPartido.js
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-import { app } from "./firebaseConfig.js"; // Usa tu inicialización de Firebase ya existente
-
-const db = getFirestore(app);
-const API_URL = "https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=133739"; // Boca Juniors
-
 export async function obtenerProximoPartido() {
-  const docRef = doc(db, "partidos", "proximo");
-  const snapshot = await getDoc(docRef);
+  const TEAM_ID = 135156; // Boca Juniors
+  const API_URL = `https://www.thesportsdb.com/api/v1/json/3/eventsnext.php?id=${TEAM_ID}`;
+  
+  try {
+    const response = await fetch(API_URL);
+    const data = await response.json();
 
-  const hoy = new Date();
+    if (!data.events || data.events.length === 0) throw new Error("No se encontraron próximos partidos");
 
-  // Si existe en Firestore y es futuro, usarlo
-  if (snapshot.exists()) {
-    const partido = snapshot.data();
-    const fechaHora = new Date(`${partido.fecha}T${partido.hora}`);
-    if (fechaHora > hoy) return partido;
+    // Tomamos el primer evento (puede mejorar con filtro si querés ligas oficiales)
+    const ev = data.events[0];
+
+    // Determinar rival según si Boca es local o visitante usando el ID
+    const teamIdStr = String(TEAM_ID);
+    let rival = ev.strHomeTeam || ev.strEvent || "";
+    if (ev.idHomeTeam && ev.idAwayTeam) {
+      rival = String(ev.idHomeTeam) === teamIdStr ? ev.strAwayTeam : ev.strHomeTeam;
+    } else {
+      // fallback: tomar la parte después de ' vs ' si existe
+      if (ev.strEvent && ev.strEvent.includes(" vs ")) {
+        const parts = ev.strEvent.split(" vs ");
+        rival = parts.find(p => !p.toLowerCase().includes("boca")) || ev.strEvent;
+      }
+    }
+
+    return {
+      rival,
+      estadio: ev.strVenue,
+      fecha: ev.dateEvent,
+      hora: ev.strTime,
+      competicion: ev.strLeague
+    };
+
+  } catch (err) {
+    console.error("Error obteniendo próximo partido:", err);
+    return null;
   }
-
-  // Si no existe o ya pasó, obtener de API
-  const res = await fetch(API_URL);
-  const data = await res.json();
-  const evento = data.events[0];
-
-  const rival = evento.strAwayTeam === "Boca Juniors" ? evento.strHomeTeam : evento.strAwayTeam;
-
-  const partidoNuevo = {
-    rival,
-    fecha: evento.dateEvent,
-    hora: evento.strTime,
-    competicion: evento.strLeague,
-    estadio: evento.strVenue || "Por definir"
-  };
-
-  // Guardar en Firestore
-  await setDoc(docRef, partidoNuevo);
-
-  return partidoNuevo;
 }
