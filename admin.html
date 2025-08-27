@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Agregar Rival</title>
+</head>
+<body>
+  <h2>Actualizar Rival en Documentos Existentes</h2>
+
+  <label for="rivalInput">Nombre del Rival:</label>
+  <input type="text" id="rivalInput" placeholder="Ej: River Plate" />
+  <button id="btnActualizar">Actualizar Documentos</button>
+
+  <p id="resultado"></p>
+
+  <!-- Firebase -->
+  <!-- Firebase -->
+<script type="module">
+import { initializeApp } 
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { 
+  getFirestore, collection, addDoc, getDocs, query, orderBy, onSnapshot, doc, updateDoc 
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+    // ⚠️ Reemplaza con tu propia config de Firebase (la misma que usas en index.html)
+      const firebaseConfig = {
+  apiKey: "AIzaSyBEXNvtQPci2sx4_a3JSDt6S2YDW4Qs9RE",
+  authDomain: "el11deboca.firebaseapp.com",
+  projectId: "el11deboca",
+  storageBucket: "el11deboca.firebasestorage.app",
+  messagingSenderId: "275338094752",
+  appId: "1:275338094752:web:64dc9f98079e2fd97b41c5",
+  measurementId: "G-EJ9L15DW36"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function agregarRival(rival) {
+      try {
+        const querySnapshot = await getDocs(collection(db, "equipos"));
+        let contador = 0;
+
+        for (const documento of querySnapshot.docs) {
+          const refDoc = doc(db, "equipos", documento.id);
+          await updateDoc(refDoc, { rival: rival });
+          contador++;
+          console.log(`Documento ${documento.id} actualizado con rival ${rival}`);
+        }
+
+        document.getElementById("resultado").innerText = 
+          `✅ ${contador} documentos actualizados con rival "${rival}"`;
+      } catch (error) {
+  console.error("Error al actualizar documentos: ", error);
+  document.getElementById("resultado").innerText = 
+    "❌ Ocurrió un error: " + error.message;
+}
+
+    }
+
+    document.getElementById("btnActualizar").addEventListener("click", () => {
+      const rival = document.getElementById("rivalInput").value.trim();
+      if (rival === "") {
+        alert("Por favor ingresa un nombre de rival válido.");
+        return;
+      }
+      agregarRival(rival);
+    });
+  </script>
+</body>
+</html>

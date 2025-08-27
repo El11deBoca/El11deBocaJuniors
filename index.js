@@ -2,12 +2,18 @@ import { obtenerProximoPartido } from "./proximoPartido.js";
 
 const CACHE_KEY = "datosPartido";
 
+// 👉 variable global donde guardamos el rival
+window.rivalActual = null;
+
 // Función para mostrar los datos en el HTML
 function mostrarDatosPartido(partido) {
   const datosDiv = document.getElementById("datos-proximo-partido");
   if (!datosDiv) return;
 
   if (partido) {
+    // guardamos rival en variable global
+    window.rivalActual = partido.rival;
+
     datosDiv.innerHTML = `
       <strong>Rival:</strong> ${partido.rival} <br />
       <strong>Estadio:</strong> ${partido.estadio} <br />
