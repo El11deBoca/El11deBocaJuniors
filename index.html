@@ -42,13 +42,7 @@
 
 </head>
 
-<!-- Al final del <body>, antes de </body> -->
-<footer style="text-align:center; padding: 10px; background-color: #002244; color: #FFD700; font-size: 14px;">
-  Contacto: 
-  <a href="https://x.com/tuoncexeneize" target="_blank" style="color: #FFD700; text-decoration: none;">
-    @tuoncexeneize
-  </a> en X
-</footer>
+
 
 
 <body>
@@ -677,6 +671,7 @@ window.enviarEquipoFirebase = async () => {
       nickname,
       formacion,
       jugadores: jugadoresSeleccionados,
+      rival: window.rivalActual,   // ✅ rival desde index.js
       timestamp: new Date(),
       votos: 0,
     });
@@ -710,6 +705,13 @@ window.shareWhatsApp = function() {
 
 
 <script type="module" src="index.js"></script>
+<!-- Al final del <body>, antes de </body> -->
+<footer style="text-align:center; padding: 10px; background-color: #002244; color: #FFD700; font-size: 14px;">
+  Contacto: 
+  <a href="https://x.com/tuoncexeneize" target="_blank" style="color: #FFD700; text-decoration: none;">
+    @tuoncexeneize
+  </a> en X
+</footer>
 </body>
 </html>
 
