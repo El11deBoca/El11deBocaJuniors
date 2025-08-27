@@ -20,10 +20,24 @@ function mostrarDatosPartido(partido) {
       <strong>Fecha:</strong> ${partido.fecha} ${partido.hora} <br />
       <strong>Competición:</strong> ${partido.competicion}
     `;
+
+    // 👉 mostrar info del filtro en la sección de equipos
+    const filtroInfo = document.getElementById("filtro-info");
+    if (filtroInfo) {
+      filtroInfo.textContent = `Mostrando equipos para: ${partido.rival}`;
+    }
+
   } else {
     datosDiv.innerText = "No se pudo cargar el próximo partido.";
+
+    // limpiar info del filtro si no hay partido
+    const filtroInfo = document.getElementById("filtro-info");
+    if (filtroInfo) filtroInfo.textContent = "";
   }
 }
+
+
+
 
 // Función para cargar datos desde la API y actualizar cache solo si cambió
 async function cargarDatosPartido() {
