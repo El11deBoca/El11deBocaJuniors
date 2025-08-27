@@ -111,7 +111,17 @@
 
 <!-- Equipos enviados -->
 <h2 id="titulo-equipos">EQUIPOS ENVIADOS</h2>
+
+<label for="filtro-rival" style="display:block; text-align:center; margin-bottom:1rem;">
+  Filtrar por rival:
+</label>
+<select id="filtro-rival" style="display:block; margin:0 auto 1rem;">
+  <option value="">Todos</option>
+  <!-- Opciones se generarán dinámicamente desde JS -->
+</select>
+
 <div id="equipos-firebase"></div>
+<p id="filtro-info" style="text-align:center; font-weight:bold;"></p>
 
 
 
@@ -624,13 +634,54 @@ function mostrarOnceIdeal(equipos) {
   contenedor.style.display = "block";
 }
 
-
 const q = query(collection(db, "equipos"), orderBy("timestamp", "desc"));
+let equiposCache = []; // Guardamos todos los equipos
+
 onSnapshot(q, (snapshot) => {
-  const equipos = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  mostrarEquiposFirebase(equipos);
-  mostrarOnceIdeal(equipos); 
+  equiposCache = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+  // Actualizamos el select de rivales
+  actualizarSelectRivales(equiposCache);
+
+  // Mostramos todos por defecto
+  mostrarEquiposFirebase(equiposCache);
+  mostrarOnceIdeal(equiposCache); 
 });
+
+// Función para actualizar el select de rivales
+function actualizarSelectRivales(equipos) {
+  const select = document.getElementById("filtro-rival");
+  const rivalesUnicos = [...new Set(equipos.map(e => e.rival).filter(Boolean))];
+
+  // Limpiar opciones (dejando "Todos")
+  select.innerHTML = '<option value="">Todos</option>';
+
+  rivalesUnicos.forEach(rival => {
+    const option = document.createElement("option");
+    option.value = rival;
+    option.textContent = rival;
+    select.appendChild(option);
+  });
+}
+
+// Evento para filtrar por rival
+document.getElementById("filtro-rival").addEventListener("change", (e) => {
+  const rivalSeleccionado = e.target.value;
+  let equiposFiltrados = equiposCache;
+
+  if (rivalSeleccionado) {
+    equiposFiltrados = equiposCache.filter(e => e.rival === rivalSeleccionado);
+  }
+
+  mostrarEquiposFirebase(equiposFiltrados);
+  mostrarOnceIdeal(equiposFiltrados);
+
+  // Mensaje de info
+  const info = document.getElementById("filtro-info");
+  info.textContent = rivalSeleccionado ? `Mostrando equipos para: ${rivalSeleccionado}` : "";
+});
+
+
 
 window.enviarEquipoFirebase = async () => {
   
@@ -677,9 +728,9 @@ window.enviarEquipoFirebase = async () => {
     });
 
 
-    alert("✅ Equipo enviado correctamente a la nube.");
+    alert("✅ Equipo enviado correctamente.");
   } catch (error) {
-    alert("❌ Error al guardar el equipo en la nube: " + error.message);
+    alert("❌ Error al guardar el equipo: " + error.message);
     console.error("Firebase error:", error);
   }
 };
