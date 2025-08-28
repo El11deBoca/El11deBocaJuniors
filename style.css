@@ -203,12 +203,14 @@
   background-color: #0033a0; /* azul más intenso */
   padding: 10px;
   border-radius: 8px;
-  color: white;
-  font-weight: 700;
+  color: rgb(210, 171, 0);
+  font-family: 'Montserrat', sans-serif; /* ← nueva fuente */
+  font-weight: 600;        /* un poco menos que 700 si querés que no grite tanto */
+  font-size: 1.1em;        /* un poco más grande para destacar */
   text-align: center;
   margin-bottom: 1rem;
+  line-height: 1.5;        /* mejora la lectura */
 }
-
 
   /* Mini-cancha */
 .mini-cancha {
@@ -315,13 +317,17 @@
   padding: 20px 30px;
 }
 #once-ideal h2 {
-  color: #F5B041;
+  color: #F5B041;         /* Amarillo Boca */
   margin-top: 0;
   margin-bottom: 25px;
   text-align: center;
-  font-weight: 700;
-  font-size: 1.5em;
+  font-weight: 700;       /* Negrita */
+  font-size: 1.8em;       /* Un poquito más grande */
+  font-family: 'Montserrat', sans-serif;  /* Nueva fuente */
+  letter-spacing: 1px;    /* Espaciado entre letras para darle más estilo */
+  text-transform: uppercase; /* MAYÚSCULAS para que quede más deportivo */
 }
+
 #cancha-ideal {
   position: relative;
   background: linear-gradient(90deg, #004080, #003060);
@@ -449,3 +455,27 @@
   background-color: #d59431;
 }
 
+.titulo-filtro {
+  font-family: 'Montserrat', sans-serif; /* misma fuente que “Once Ideal” */
+  font-weight: 700;
+  font-size: 1.2em;
+  text-align: center;
+  color: #ffffff; /* amarillo Boca */
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px #000000; /* sombra para resaltar */
+}
+
+.select-filtro {
+  display: block;
+  margin: 0 auto 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #F5B041;
+  background-color: #0033A0;
+  color: #F5B041;
+  font-weight: 700;
+}
