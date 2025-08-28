@@ -1,17 +1,13 @@
 import { obtenerProximoPartido } from "./proximoPartido.js";
 
 const CACHE_KEY = "datosPartido";
-
-// 👉 variable global donde guardamos el rival
 window.rivalActual = null;
 
-// Función para mostrar los datos en el HTML
 function mostrarDatosPartido(partido) {
   const datosDiv = document.getElementById("datos-proximo-partido");
   if (!datosDiv) return;
 
   if (partido) {
-    // guardamos rival en variable global
     window.rivalActual = partido.rival;
 
     datosDiv.innerHTML = `
@@ -21,7 +17,6 @@ function mostrarDatosPartido(partido) {
       <strong>Competición:</strong> ${partido.competicion}
     `;
 
-    // 👉 mostrar info del filtro en la sección de equipos
     const filtroInfo = document.getElementById("filtro-info");
     if (filtroInfo) {
       filtroInfo.textContent = `Mostrando equipos para: ${partido.rival}`;
@@ -29,36 +24,32 @@ function mostrarDatosPartido(partido) {
 
   } else {
     datosDiv.innerText = "No se pudo cargar el próximo partido.";
-
-    // limpiar info del filtro si no hay partido
     const filtroInfo = document.getElementById("filtro-info");
     if (filtroInfo) filtroInfo.textContent = "";
   }
 }
 
-
-
-
-// Función para cargar datos desde la API y actualizar cache solo si cambió
+// Carga datos desde la API y actualiza cache solo si cambió
 async function cargarDatosPartido() {
   try {
     const nuevoPartido = await obtenerProximoPartido();
+    if (!nuevoPartido) return mostrarDatosPartido(null);
+
     mostrarDatosPartido(nuevoPartido);
 
-    if (!nuevoPartido) return;
-
     const cache = JSON.parse(localStorage.getItem(CACHE_KEY) || "{}");
-
-    // Guardar solo si es un partido diferente
     const cacheDatos = cache.datos || {};
+    const ahora = Date.now();
+
+    // Guardar en cache solo si no existe o si pasó más de 12 horas
     if (
-      nuevoPartido.rival !== cacheDatos.rival ||
-      nuevoPartido.fecha !== cacheDatos.fecha ||
-      nuevoPartido.hora !== cacheDatos.hora
+      !cache.fechaCache ||
+      ahora - cache.fechaCache > 12 * 60 * 60 * 1000 ||
+      nuevoPartido.rival !== cacheDatos.rival
     ) {
       localStorage.setItem(
         CACHE_KEY,
-        JSON.stringify({ datos: nuevoPartido, fecha: new Date().toDateString() })
+        JSON.stringify({ datos: nuevoPartido, fechaCache: ahora })
       );
     }
   } catch (err) {
@@ -67,34 +58,34 @@ async function cargarDatosPartido() {
   }
 }
 
-// Función principal: usa caché si es del mismo día
+// Mostrar desde cache si existe y es reciente
 function mostrarPartidoConCache() {
   const cache = JSON.parse(localStorage.getItem(CACHE_KEY) || "{}");
-  const hoy = new Date().toDateString();
+  const ahora = Date.now();
 
-  if (cache.fecha === hoy && cache.datos) {
+  if (cache.fechaCache && ahora - cache.fechaCache <= 12 * 60 * 60 * 1000 && cache.datos) {
     mostrarDatosPartido(cache.datos);
   } else {
     cargarDatosPartido();
   }
 }
 
-// Función para programar actualización automática a medianoche
+// Programar actualización automática a medianoche
 function programarActualizacionMedianoche() {
   const ahora = new Date();
   const manana = new Date(ahora);
-  manana.setHours(24, 0, 0, 0); // medianoche
+  manana.setHours(24, 0, 0, 0);
   const msHastaMedianoche = manana - ahora;
 
   setTimeout(() => {
     cargarDatosPartido();
-    // Reprogramar para el siguiente día
     programarActualizacionMedianoche();
   }, msHastaMedianoche);
 }
 
-// Al cargar la página
 window.addEventListener("DOMContentLoaded", () => {
+   // 🔹 Borra la caché para forzar recarga desde la API
+  localStorage.removeItem("datosPartido");
   mostrarPartidoConCache();
   programarActualizacionMedianoche();
 
