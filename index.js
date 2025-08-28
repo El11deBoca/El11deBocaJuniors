@@ -84,8 +84,7 @@ function programarActualizacionMedianoche() {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-   // 🔹 Borra la caché para forzar recarga desde la API
-  localStorage.removeItem("datosPartido");
+ 
   mostrarPartidoConCache();
   programarActualizacionMedianoche();
 
