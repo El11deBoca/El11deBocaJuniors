@@ -749,11 +749,54 @@ window.enviarEquipoFirebase = async () => {
     });
 
 
-    alert("✅ Equipo enviado correctamente.");
+     // Primero aviso que se envió
+  alert("✅ Equipo enviado correctamente.");
+
+  // Después mostramos el modal de Russo
+  mostrarModalRusso();
   } catch (error) {
     alert("❌ Error al guardar el equipo: " + error.message);
     console.error("Firebase error:", error);
   }
+  function mostrarModalRusso() {
+  const modal = document.getElementById("modal-russo");
+  modal.style.opacity = 0;
+  modal.style.display = "flex"; // mostrar modal
+
+  // Fade in
+  let op = 0;
+  const fadeIn = setInterval(() => {
+    if (op >= 1) {
+      clearInterval(fadeIn);
+      // Mantener visible 3 segundos
+      setTimeout(() => {
+        // Fade out
+        let opOut = 1;
+        const fadeOut = setInterval(() => {
+          if (opOut <= 0) {
+            clearInterval(fadeOut);
+            modal.style.display = "none";
+          } else {
+            opOut -= 0.05;
+            modal.style.opacity = opOut;
+          }
+        }, 20);
+      }, 2000);
+    } else {
+      op += 0.05;
+      modal.style.opacity = op;
+    }
+  }, 30);
+
+  // Cerrar al hacer clic fuera del contenido
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      modal.style.opacity = 0;
+    }
+  };
+}
+
 };
 
   window.shareTwitter = function() {
@@ -784,6 +827,17 @@ window.shareWhatsApp = function() {
     @tuoncexeneize
   </a> en X
 </footer>
+
+<!-- MODAL DE RUSSO -->
+<div id="modal-russo">
+  <div class="modal-contenido">
+    <img src="russo1.jpg" alt="Miguel Russo" />
+    <p>Miguelo te lo agradece 🙌</p>
+  </div>
+</div>
+
+
+</div>
 </body>
 </html>
 
