@@ -504,5 +504,46 @@
   margin-bottom: 4px;
 }
 
+.titulo-filtro {
+  display: block;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1em;
+  color: #F5B041; /* amarillo Boca */
+  margin-bottom: 10px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.select-filtro {
+  display: block;
+  margin: 0 auto 15px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 2px solid #F5B041;
+  background-color: #001B3D; /* azul Boca */
+  color: #F5B041;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  min-width: 140px;
+  transition: all 0.3s ease;
+}
+
+.select-filtro:hover {
+  background-color: #003080;
+  border-color: #FFC72C;
+}
+
+.select-filtro option {
+  color: #001B3D;
+  background-color: #F5B041;
+  font-weight: 600;
+}
+
+
+
+
+
+
 
 

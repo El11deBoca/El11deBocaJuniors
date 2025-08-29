@@ -8,3 +8,5 @@ export const notas = [
     "Empate = 1"
 ];
 
+
+
