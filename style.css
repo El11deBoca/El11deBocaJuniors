@@ -479,5 +479,30 @@
   z-index: 9999;
 }
  
+#notas-jugadores {
+  margin-top: 10px;
+  background: #f9f9f9;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Estilo para la lista */
+#notas-jugadores ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+}
+
+#notas-jugadores li {
+  margin-bottom: 4px;
+}
+
 
 
