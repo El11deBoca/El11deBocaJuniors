@@ -91,11 +91,26 @@
     <label for="nickname" style="margin-top:12px;">Ayudante de Campo:</label>
 <input type="text" id="nickname" placeholder="Nombre" />
 
-
-    <button class="firebase-btn" onclick="enviarEquipoFirebase()">Enviar Equipo</button>
+ <!-- DIV para notas de jugadores -->
+    <div id="notas-jugadores" style="margin-top:8px; background:#f9f9f9; padding:8px; border-radius:6px; box-shadow:0 0 5px rgba(0,0,0,0.1); font-size:14px; line-height:1.4; color:#333;">
+      <!-- Aquí se cargarán las notas automáticamente -->
+    </div>
+ <button class="firebase-btn" onclick="enviarEquipoFirebase()">Enviar Equipo</button>
   </div>
   <div id="cancha"></div>
 </div>
+ <!-- Importar archivo notas.js y mostrar las notas -->
+<script type="module">
+  import { notas } from "./notas.js";
+
+  const notasDiv = document.getElementById('notas-jugadores');
+  if (notas && notas.length > 0) {
+    notasDiv.innerHTML = "<ul style='padding-left:18px; margin:0;'>" 
+      + notas.map(n => `<li>${n}</li>`).join('') 
+      + "</ul>";
+  }
+</script>
+
 
 <!-- 11 Ideal -->
 <div id="once-ideal" style="display:none;">
@@ -646,9 +661,15 @@ onSnapshot(q, (snapshot) => {
   // Actualizamos el select de rivales
   actualizarSelectRivales(equiposCache);
 
-  // Mostramos todos por defecto
-  mostrarEquiposFirebase(equiposCache);
-  mostrarOnceIdeal(equiposCache); 
+  // Filtramos por el próximo rival si existe
+  let equiposParaMostrar = equiposCache;
+  if (window.rivalActual) {
+    equiposParaMostrar = equiposCache.filter(e => e.rival === window.rivalActual);
+  }
+
+  // Mostramos los equipos filtrados
+  mostrarEquiposFirebase(equiposParaMostrar);
+  mostrarOnceIdeal(equiposParaMostrar); 
 });
 
 // Función para actualizar el select de rivales
@@ -731,11 +752,54 @@ window.enviarEquipoFirebase = async () => {
     });
 
 
-    alert("✅ Equipo enviado correctamente.");
+     // Primero aviso que se envió
+  alert("✅ Equipo enviado correctamente.");
+
+  // Después mostramos el modal de Russo
+  mostrarModalRusso();
   } catch (error) {
     alert("❌ Error al guardar el equipo: " + error.message);
     console.error("Firebase error:", error);
   }
+  function mostrarModalRusso() {
+  const modal = document.getElementById("modal-russo");
+  modal.style.opacity = 0;
+  modal.style.display = "flex"; // mostrar modal
+
+  // Fade in
+  let op = 0;
+  const fadeIn = setInterval(() => {
+    if (op >= 1) {
+      clearInterval(fadeIn);
+      // Mantener visible 3 segundos
+      setTimeout(() => {
+        // Fade out
+        let opOut = 1;
+        const fadeOut = setInterval(() => {
+          if (opOut <= 0) {
+            clearInterval(fadeOut);
+            modal.style.display = "none";
+          } else {
+            opOut -= 0.05;
+            modal.style.opacity = opOut;
+          }
+        }, 20);
+      }, 2000);
+    } else {
+      op += 0.05;
+      modal.style.opacity = op;
+    }
+  }, 30);
+
+  // Cerrar al hacer clic fuera del contenido
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+      modal.style.opacity = 0;
+    }
+  };
+}
+
 };
 
   window.shareTwitter = function() {
@@ -766,6 +830,17 @@ window.shareWhatsApp = function() {
     @tuoncexeneize
   </a> en X
 </footer>
+
+<!-- MODAL DE RUSSO -->
+<div id="modal-russo">
+  <div class="modal-contenido">
+    <img src="russo1.jpg" alt="Miguel Russo" />
+    <p>Miguelo te lo agradece 🙌</p>
+  </div>
+</div>
+
+
+</div>
 </body>
 </html>
 

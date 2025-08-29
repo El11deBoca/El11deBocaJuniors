@@ -45,11 +45,20 @@ export async function obtenerProximoPartido() {
     // Traducir la competición si existe en el mapa
     const competicionEsp = traduccionesCompeticion[ev.strLeague] || ev.strLeague || "Competición desconocida";
 
+    // Ajustar hora restando 3 horas
+    let horaAjustada = ev.strTime || "Hora no disponible";
+    if (horaAjustada !== "Hora no disponible") {
+      const [hh, mm] = horaAjustada.split(":").map(Number);
+      let nuevaHora = hh - 3;
+      if (nuevaHora < 0) nuevaHora += 24; // si pasa a la noche anterior
+      horaAjustada = `${String(nuevaHora).padStart(2, "0")}:${String(mm).padStart(2, "0")}`;
+    }
+
     return {
       rival,
       estadio: ev.strVenue || "Estadio desconocido",
       fecha: ev.dateEvent || "Fecha no disponible",
-      hora: ev.strTime || "Hora no disponible",
+      hora: horaAjustada,
       competicion: competicionEsp
     };
 
