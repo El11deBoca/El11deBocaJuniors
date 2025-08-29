@@ -249,7 +249,17 @@
     box-shadow: 0 0 4px #00000088;
 }
 
-
+.mini-cancha::after {
+  content: "www.tuoncexeneize.com";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(255, 215, 0, 0.85); /* Amarillo dorado con leve transparencia */
+  pointer-events: none; /* No molesta */
+}
 
   .mini-posicion {
   position: absolute;
