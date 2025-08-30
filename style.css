@@ -577,6 +577,25 @@ details[open] summary::before {
   color: #ffcc00;
 }
 
+@media (max-width: 768px) {
+  #contenedor {
+    flex-direction: column; /* formulario arriba, cancha abajo */
+  }
+
+  #formacionSelector {
+    order: 1; 
+    max-width: 100%; 
+  }
+
+  #cancha {
+    order: 2; 
+    min-width: auto; 
+    width: 100%;       /* ocupa todo el ancho disponible */
+    height: auto;      /* se ajusta automáticamente */
+    aspect-ratio: 1 / 1; /* mantiene proporción cuadrada */
+  }
+}
+
 
 
 
