@@ -94,10 +94,16 @@
 <button class="firebase-btn" onclick="enviarEquipoFirebase()">Enviar Equipo</button>
 
 
- <!-- DIV para notas de jugadores -->
-    <div id="notas-jugadores" style="margin-top:8px; background:#f9f9f9; padding:8px; border-radius:6px; box-shadow:0 0 5px rgba(0,0,0,0.1); font-size:14px; line-height:1.4; color:#333;">
-      <!-- Aquí se cargarán las notas automáticamente -->
-    </div>
+<details>
+  <summary>Abrir datos del partido</summary>
+  <p>No jugará: Pellegrino</p>
+  <p>No jugará: Belmonte</p>
+  <p>Historial</p>
+  <p>Boca: 8 ganados</p>
+  <p>Aldosivi: 2 ganados</p>
+  <p>Empates: 1</p>
+  <p>Arbitro: Sebastian Zunino</p>
+</details> 
  
   </div>
   <div id="cancha"></div>
@@ -613,6 +619,7 @@ function mostrarOnceIdeal(equipos) {
 
   canchaIdeal.innerHTML = ""; // limpio antes
 
+  
   const posicionesBase = formaciones[equipoTop.formacion];
   if (!posicionesBase) {
     contenedor.style.display = "none";
