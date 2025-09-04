@@ -721,7 +721,7 @@ details[open] summary::before {
 
 .carta-jugador .nombre-jugador {
   font-weight: bold;
-  font-size: 0.75em;
+  font-size: 0.65em;
   color: #00215E;
   margin-bottom: 1px;
   white-space: nowrap;
@@ -735,7 +735,15 @@ details[open] summary::before {
   color: #333;
 }
 
-
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+  .carta-jugador {
+    width: 80px;       /* más espacio en móviles */
+  }
+  .carta-jugador .nombre-jugador {
+    font-size: 0.6em;  /* un poco más chica para que entre */
+  }
+}
 
 
 
