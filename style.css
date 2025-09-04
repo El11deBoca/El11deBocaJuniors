@@ -425,9 +425,13 @@
 /* Media query para pantallas muy pequeñas */
 @media (max-width: 480px) {
   #cancha-ideal {
-    max-height: 500px;  /* cancha más larga que los 300px actuales */
-    width: 100%;        /* sigue ocupando todo el ancho disponible */
-    aspect-ratio: auto; /* deja que la altura domine */
+    width: 100%;
+    aspect-ratio: 2 / 3;           /* cancha más larga */
+    max-height: calc(100vh - 200px); /* no invada otras secciones */
+    height: auto;
+    margin-bottom: 20px;           /* espacio seguro con sección inferior */
+    position: relative;
+    overflow: hidden;
   }
 
   #cancha-ideal::before {
@@ -442,8 +446,12 @@
     width: 70px;
     height: 8px;
   }
-}
 
+  #cancha-ideal .posicion-ideal {
+    transform: translate(-50%, -50%) scale(1); /* mantiene posición relativa */
+  }
+
+}
 
 .posicion-ideal {
   position: absolute;
