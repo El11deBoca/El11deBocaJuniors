@@ -596,6 +596,38 @@ details[open] summary::before {
   }
 }
 
+@media (max-width: 768px) {
+  /* Ajuste general del contenedor de 11 ideal */
+  #once-ideal {
+    width: 100%;       /* ocupa todo el ancho del dispositivo */
+    height: auto;      /* altura automática */
+    aspect-ratio: 1 / 1; /* mantiene proporción cuadrada si querés */
+    margin: 10px 0;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  /* Si tenés un título dentro */
+  #once-ideal h2,
+  #once-ideal h3 {
+    font-size: 1.2em;  /* más chico para mobile */
+    text-align: center;
+  }
+
+  /* Ajuste de la cancha interna (si #cancha-ideal es el contenedor de los jugadores) */
+  #cancha-ideal {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  /* Ajuste de las cartas de jugadores si las tenés */
+  #cancha-ideal .carta-jugador {
+    width: 12%;       /* más pequeño para que entren en mobile */
+    height: auto;
+  }
+}
+
 
 
 
