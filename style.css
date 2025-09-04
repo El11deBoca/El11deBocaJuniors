@@ -339,38 +339,85 @@
 }
 
 #cancha-ideal {
-  position: relative;
-  background: linear-gradient(90deg, #004080, #003060);
-  border: 3px solid #F5B041;
-  border-radius: 14px;
-  height: 420px;
-  min-width: 600px;
+  width: 300%;
+  max-width: 480px;
+  height: 480px;
   margin: 0 auto;
-  box-shadow: 0 0 10px #F5B041;
+  position: relative;
+  border-radius: 14px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  background-color: #002d05; /* Césped verde */
+
+  /* Línea central */
+  background-image: linear-gradient(white 2px, transparent 2px);
+  background-size: 100% 2px;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.posicion-ideal {
+
+/* Círculo central */
+#cancha-ideal::before {
+  content: "";
   position: absolute;
-  background-color: #F5B041;
-  color: #00215E;
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 0.9em;
-  font-weight: 700;
-  width: 140px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-sizing: border-box;
-  box-shadow: 0 0 6px rgba(0,0,0,0.4);
-
-  /* Centrar el texto dentro de la caja */
-  align-items: center;
-  text-align: center;
-
-  /* Centrar la caja en la posición exacta */
+  top: 50%;
+  left: 50%;
+  width: 60px;
+  height: 60px;
+  border: 2px solid white;
+  border-radius: 50%;
   transform: translate(-50%, -50%);
 }
 
+/* Arco superior */
+#cancha-ideal::after {
+  content: "www.tuoncexeneize.com";
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  color: rgba(238, 207, 4, 0.871); /* semi-transparente */
+  font-weight: bold;
+  pointer-events: none; /* no interfiere con los jugadores */
+  white-space: nowrap;
+  z-index: 0; /* detrás de los jugadores */
+}
+
+
+/* Arco inferior */
+#cancha-ideal .arco-inferior {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 80px;
+  height: 8px;
+  border: 2px solid white;
+  border-radius: 40px 40px 0 0;
+  transform: translateX(-50%);
+}
+
+
+
+
+.posicion-ideal {
+  position: absolute;
+  background-color: rgba(248, 221, 101, 0.962); /* Amarillo translúcido y más discreto */
+  color: #ccc200;
+  border-radius: 8px;
+  padding: 2px 4px;       /* Reduce el tamaño del fondo */
+  font-size: 0.9em;
+  font-weight: 700;
+  width: auto;             /* que se ajuste al contenido de la carta */
+  display: flex;
+  flex-direction: column;
+  gap: 2px;                /* menos espacio entre elementos */
+  box-sizing: border-box;
+  align-items: center;
+  text-align: center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 4px rgba(0,0,0,0.3); /* sombra más sutil */
+}
 
   .posicion-ideal label {
     display: none;
@@ -632,12 +679,12 @@ details[open] summary::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: transparent;  /* Fondo transparente */
+  background: transparent;  /* Fondo transparente, elimina el amarillo */
   border-radius: 12px;
-  padding: 2px;
-  width: 70px;               /* Ancho de la carta */
+  padding: 2px;             /* Reduce espacio interno */
+  width: 55px;              /* Más compacto */
   text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .carta-jugador img.foto-jugador {
@@ -652,9 +699,9 @@ details[open] summary::before {
 
 .carta-jugador .nombre-jugador {
   font-weight: bold;
-  font-size: 0.75em;
+  font-size: 0.65em;
   color: #00215E;
-  margin-bottom: 2px;
+  margin-bottom: 1px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -662,9 +709,10 @@ details[open] summary::before {
 }
 
 .carta-jugador label {
-  font-size: 0.7em;
+  font-size: 0.6em;
   color: #333;
 }
+
 
 
 
