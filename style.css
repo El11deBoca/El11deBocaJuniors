@@ -339,9 +339,10 @@
 }
 
 #cancha-ideal {
-  width: 300%;
+  width: 100%;
   max-width: 480px;
-  height: 480px;
+  height: 60vw;        /* altura proporcional al ancho */
+  max-height: 480px;   /* límite superior para desktop */
   margin: 0 auto;
   position: relative;
   border-radius: 14px;
@@ -368,33 +369,50 @@
   transform: translate(-50%, -50%);
 }
 
-/* Arco superior */
+/* Texto superior (ej: web) */
 #cancha-ideal::after {
   content: "www.tuoncexeneize.com";
   position: absolute;
-  top: 10%;
+  top: 5%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 16px;
-  color: rgba(238, 207, 4, 0.871); /* semi-transparente */
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: rgba(238, 207, 4, 0.87);
   font-weight: bold;
-  pointer-events: none; /* no interfiere con los jugadores */
+  pointer-events: none;
   white-space: nowrap;
   z-index: 0; /* detrás de los jugadores */
 }
-
 
 /* Arco inferior */
 #cancha-ideal .arco-inferior {
   content: "";
   position: absolute;
-  bottom: 0;
+  bottom: 2%;
   left: 50%;
   width: 80px;
   height: 8px;
   border: 2px solid white;
   border-radius: 40px 40px 0 0;
   transform: translateX(-50%);
+}
+
+/* Media query para pantallas muy pequeñas */
+@media (max-width: 400px) {
+  #cancha-ideal {
+    height: 200px; /* se ajusta aún más en móviles pequeños */
+  }
+  #cancha-ideal::before {
+    width: 40px;
+    height: 40px;
+  }
+  #cancha-ideal::after {
+    font-size: 12px;
+  }
+  #cancha-ideal .arco-inferior {
+    width: 60px;
+    height: 6px;
+  }
 }
 
 
