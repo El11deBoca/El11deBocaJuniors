@@ -596,8 +596,6 @@ function mostrarEquiposFirebase(equipos) {
 }
 
 
-
-
 function mostrarOnceIdeal(equipos) {
   const contenedor = document.getElementById("once-ideal");
   const canchaIdeal = document.getElementById("cancha-ideal");
@@ -640,7 +638,7 @@ function mostrarOnceIdeal(equipos) {
     return nombreCompleto.split(" ").pop();
   };
 
-  equipoTop.jugadores.forEach((jugador, i) => {
+equipoTop.jugadores.forEach((jugador, i) => {
     const pos = posicionesBase[i];
     if (!pos) return;
 
@@ -652,6 +650,7 @@ function mostrarOnceIdeal(equipos) {
 
     canchaIdeal.appendChild(divPos);
   });
+
 
   // Mostrar título con el nombre del equipo más votado
   let tituloTop = document.getElementById("nombre-equipo-top");
