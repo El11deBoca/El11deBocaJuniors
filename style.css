@@ -112,12 +112,37 @@
   position: relative;
   flex: 3;
   background-color: #004400;
-  border: 3px solid #F5B041;
+  border: 3px solid #F5B041; /* tu borde amarillo */
   border-radius: 14px;
-  height: 480px;       /* altura reducida */
-  min-width: 480px;    /* ancho mínimo reducido */
+  height: 480px;
+  min-width: 480px;
   box-shadow: 0 0 10px #F5B041;
+  overflow: hidden; /* para que nada se salga de la cancha */
 }
+
+/* Línea de mitad de cancha */
+#cancha::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 2px solid white;
+}
+
+/* Círculo central */
+#cancha::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;   /* tamaño del círculo, podés ajustar */
+  height: 80px;
+  border: 2px solid white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
 
 #titulo-equipos { 
   background-color: #003060;
