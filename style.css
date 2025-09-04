@@ -341,7 +341,7 @@
 #cancha-ideal {
   width: 100%;
   max-width: 480px;
-  height: 60vw;        /* altura proporcional al ancho */
+  aspect-ratio: 3/2;   /* proporción ancho:alto = 3:2 */
   max-height: 400px;   /* límite superior para desktop */
   margin: 0 auto;
   position: relative;
@@ -398,10 +398,10 @@
 }
 
 /* Media query para pantallas muy pequeñas */
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   #cancha-ideal {
     max-height: 300px;  /* no invade otras secciones */
-    height: auto;       /* mantiene proporción */
+    width: 100%;       /* mantiene proporción */
   }
 
   #cancha-ideal::before {
