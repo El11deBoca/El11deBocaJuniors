@@ -342,7 +342,7 @@
   width: 100%;
   max-width: 480px;
   height: 60vw;        /* altura proporcional al ancho */
-  max-height: 480px;   /* límite superior para desktop */
+  max-height: 400px;   /* límite superior para desktop */
   margin: 0 auto;
   position: relative;
   border-radius: 14px;
@@ -400,14 +400,17 @@
 /* Media query para pantallas muy pequeñas */
 @media (max-width: 400px) {
   #cancha-ideal {
-    height: 200px; /* se ajusta aún más en móviles pequeños */
+    max-height: 300px;  /* no invade otras secciones */
+    height: auto;       /* mantiene proporción */
   }
+
   #cancha-ideal::before {
     width: 40px;
     height: 40px;
   }
   #cancha-ideal::after {
     font-size: 12px;
+    top: 5px;           /* marca de agua cerca del borde superior */
   }
   #cancha-ideal .arco-inferior {
     width: 60px;
@@ -416,15 +419,13 @@
 }
 
 
-
-
 .posicion-ideal {
   position: absolute;
   background-color: rgba(248, 221, 101, 0.962); /* Amarillo translúcido y más discreto */
   color: #ccc200;
   border-radius: 8px;
   padding: 2px 4px;       /* Reduce el tamaño del fondo */
-  font-size: 0.9em;
+  font-size: 0.7em;
   font-weight: 700;
   width: auto;             /* que se ajuste al contenido de la carta */
   display: flex;
@@ -706,8 +707,8 @@ details[open] summary::before {
 }
 
 .carta-jugador img.foto-jugador {
-  width: 60px;   /* antes 70px */
-  height: 60px;
+  width: 40px;   /* antes 70px */
+  height: 40px;
   border-radius: 50%;
   object-fit: contain; /* cambia cover por contain para no recortar */
   object-position: center;
