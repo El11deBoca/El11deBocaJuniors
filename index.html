@@ -49,6 +49,7 @@
 
 <body>
 
+
 <div class="titulo-principal">
   <h1></h1>
   <p></p>
@@ -595,6 +596,38 @@ function mostrarEquiposFirebase(equipos) {
   });
 }
 
+const jugadoresConFotos = {
+  "Miguel Merentiel": "img/jugadores/merentiel.png",
+  "Leandro Brey": "img/jugadores/brey.png",
+  "Lautaro Blanco": "img/jugadores/blanco.png",
+  "Lautaro Di Lollo": "img/jugadores/dilollo.png",
+  "Ayrton Costa": "img/jugadores/costa.png",
+  "Carlos Palacios": "img/jugadores/palacios.png",
+  "Leandro Paredes": "img/jugadores/paredes.png",
+  "Kevin Zenon": "img/jugadores/zenon.png",
+  "Alan Velasco": "img/jugadores/velasco.png",
+  "Agustin Marchesin": "img/jugadores/marchesin.png",
+  "Marco Pellegrino": "img/jugadores/pellegrino.png",
+  "Brian Aguirre": "img/jugadores/aguirre.png",
+  "Rodrigo Battaglia": "img/jugadores/battaglia.png",
+  "Ezequiel Zeballos": "img/jugadores/zeballos.png",
+  "William Alarcon": "img/jugadores/alarcon.png",
+  "Edinson Cavani": "img/jugadores/cavani.png",
+  "Juan Barinaga": "img/jugadores/barinaga.png",
+  "Milton Gimenez": "img/jugadores/gimenez.png",
+  "Ander Herrera": "img/jugadores/herrera.png",
+  "Milton Delgado": "img/jugadores/delgado.png",
+  "Lucas Blondel": "img/jugadores/blondel.png",
+  "Luis Advincula": "img/jugadores/advincula.png",
+  "Tomas Belmonte": "img/jugadores/belmonte.png",
+  "Nicolas Figal": "img/jugadores/figal.png",
+  "Frank Fabra": "img/jugadores/fabra.png",
+  "Lucas Janson": "img/jugadores/janson.png",
+  "Sergio Romero": "img/jugadores/romero.png",
+  "Camilo Rey Domenech": "img/jugadores/reydomenech.png",
+  "Mateo Mendia": "img/jugadores/mendia.png",
+};
+
 
 function mostrarOnceIdeal(equipos) {
   const contenedor = document.getElementById("once-ideal");
@@ -646,10 +679,19 @@ equipoTop.jugadores.forEach((jugador, i) => {
     divPos.className = "posicion-ideal";
     divPos.style.top = pos.top + "%";
     divPos.style.left = pos.left + "%";
-    divPos.innerHTML = `<label>${pos.label}</label><span>${obtenerApellido(jugador)}</span>`;
+    // Obtenemos la foto desde la carpeta img/jugadores
+  const urlFoto = jugadoresConFotos[jugador.trim()] || 'https://via.placeholder.com/80';
 
-    canchaIdeal.appendChild(divPos);
-  });
+  divPos.innerHTML = `
+    <div class="carta-jugador">
+      <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
+      <div class="nombre-jugador">${obtenerApellido(jugador)}</div>
+      <label>${pos.label}</label>
+    </div>
+  `;
+
+  canchaIdeal.appendChild(divPos);
+});
 
 
   // Mostrar título con el nombre del equipo más votado
