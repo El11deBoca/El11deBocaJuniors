@@ -398,7 +398,7 @@
 #cancha-ideal::after {
   content: "www.tuoncexeneize.com";
   position: absolute;
-  top: 5%;
+  top: 2%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 14px;
@@ -425,21 +425,22 @@
 /* Media query para pantallas muy pequeñas */
 @media (max-width: 480px) {
   #cancha-ideal {
-    max-height: 300px;  /* no invade otras secciones */
-    width: 100%;       /* mantiene proporción */
+    max-height: 500px;  /* cancha más larga que los 300px actuales */
+    width: 100%;        /* sigue ocupando todo el ancho disponible */
+    aspect-ratio: auto; /* deja que la altura domine */
   }
 
   #cancha-ideal::before {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
   #cancha-ideal::after {
     font-size: 12px;
     top: 5px;           /* marca de agua cerca del borde superior */
   }
   #cancha-ideal .arco-inferior {
-    width: 60px;
-    height: 6px;
+    width: 70px;
+    height: 8px;
   }
 }
 
