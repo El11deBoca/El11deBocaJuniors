@@ -366,13 +366,14 @@
 #cancha-ideal {
   width: 100%;
   max-width: 480px;
-  aspect-ratio: 3/2;   /* proporción ancho:alto = 3:2 */
+  aspect-ratio: 3/2.4;   /* proporción ancho:alto = 3:2 */
   max-height: 400px;   /* límite superior para desktop */
   margin: 0 auto;
   position: relative;
   border-radius: 14px;
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
   background-color: #002d05; /* Césped verde */
+  border: 3px solid white;
 
   /* Línea central */
   background-image: linear-gradient(white 2px, transparent 2px);
@@ -426,7 +427,7 @@
 @media (max-width: 480px) {
   #cancha-ideal {
     width: 100%;
-    aspect-ratio: 2 / 3;           /* cancha más larga */
+    aspect-ratio: 2 / 4;           /* cancha más larga */
     max-height: calc(100vh - 200px); /* no invada otras secciones */
     height: auto;
     margin-bottom: 20px;           /* espacio seguro con sección inferior */
@@ -447,8 +448,14 @@
     height: 8px;
   }
 
-  #cancha-ideal .posicion-ideal {
+ #cancha-ideal .posicion-ideal {
     transform: translate(-50%, -50%) scale(1); /* mantiene posición relativa */
+  }
+
+  #cancha-ideal .posicion-ideal {
+    max-width: none;        /* elimina límite de 100px */
+    white-space: nowrap;    /* no dividir el apellido en varias líneas */
+    font-size: 0.75em;      /* opcional, lo hace un poco más chico en mobile */
   }
 
 }
