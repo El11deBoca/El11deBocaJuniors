@@ -129,7 +129,7 @@
 
 <!-- 11 Ideal -->
 <div id="once-ideal" style="display:none;">
-  <h2>Once Ideal (Equipo más votado)</h2>
+  <h2>Once Ideal</h2>
 
   <!-- Datos del próximo partido -->
   <div id="datos-proximo-partido" class="info-partido">
@@ -138,6 +138,7 @@
 
   <div id="cancha-ideal"></div>
 </div>
+
 
 <!-- Script para cargar datos del próximo partido -->
 
@@ -682,13 +683,17 @@ equipoTop.jugadores.forEach((jugador, i) => {
     // Obtenemos la foto desde la carpeta img/jugadores
   const urlFoto = jugadoresConFotos[jugador.trim()] || 'https://via.placeholder.com/80';
 
-  divPos.innerHTML = `
-    <div class="carta-jugador">
-      <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
-      <div class="nombre-jugador">${obtenerApellido(jugador)}</div>
-      <label>${pos.label}</label>
-    </div>
-  `;
+  // Detectar si es móvil
+    const esMobile = window.innerWidth <= 480;
+
+    divPos.innerHTML = `
+      <div class="carta-jugador">
+        <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
+        ${esMobile 
+          ? `<div class="nombre-jugador">${jugador}</div>` 
+          : `<div class="nombre-jugador">${obtenerApellido(jugador)}</div>`}
+      </div>
+    `;
 
   canchaIdeal.appendChild(divPos);
 });

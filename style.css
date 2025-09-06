@@ -341,7 +341,7 @@
     font-size: 0.85em;
   }
 
-  /* Estilos para 11 ideal */
+/* Estilos para 11 ideal */
 #once-ideal {
   background-color: #001B3D;
   width: 100%;
@@ -362,6 +362,7 @@
   letter-spacing: 1px;    /* Espaciado entre letras para darle más estilo */
   text-transform: uppercase; /* MAYÚSCULAS para que quede más deportivo */
 }
+
 
 #cancha-ideal {
   width: 100%;
@@ -439,55 +440,70 @@
     width: 50px;
     height: 50px;
   }
+
   #cancha-ideal::after {
     font-size: 12px;
-    top: 5px;           /* marca de agua cerca del borde superior */
+    top: 5px;
   }
+
   #cancha-ideal .arco-inferior {
     width: 70px;
     height: 8px;
   }
 
- #cancha-ideal .posicion-ideal {
-    transform: translate(-50%, -50%) scale(1); /* mantiene posición relativa */
-  }
-
   #cancha-ideal .posicion-ideal {
-    max-width: none;        /* elimina límite de 100px */
-    white-space: nowrap;    /* no dividir el apellido en varias líneas */
-    font-size: 0.75em;      /* opcional, lo hace un poco más chico en mobile */
+    transform: translate(-50%, -50%) scale(1.8); /* aumenta tamaño de la carta */
+    max-width: none;
+    min-width: fit-content;
+    font-size: 0;         /* oculta el texto */
+    padding: 0;           /* elimina padding del texto */
+    margin: 5px;            /* separa cartas entre sí */
+    z-index: 10;            /* para que no queden debajo de otras cartas */
   }
 
+  #cancha-ideal .posicion-ideal span {
+    display: none;        /* asegura que el nombre no aparezca */
+  }
 }
+
+
+
 
 .posicion-ideal {
   position: absolute;
-  background-color: rgba(248, 221, 101, 0.962); /* Amarillo translúcido y más discreto */
-  color: #ccc200;
-  border-radius: 8px;
-  padding: 2px 4px;       /* Reduce el tamaño del fondo */
-  font-size: 0.8em;
-  font-weight: 700;
-  width: auto;             /* que se ajuste al contenido de la carta */
+  background: none; /* ❌ Sin fondo */
+  border: none;     /* ❌ Sin borde */
+  box-shadow: none; /* ❌ Sin sombra */
+  padding: 0;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 2px;                /* menos espacio entre elementos */
-  box-sizing: border-box;
   align-items: center;
   text-align: center;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 4px rgba(0,0,0,0.3); /* sombra más sutil */
-  min-width: auto;         /* ancho flexible */
-  max-width: 100px;        /* limitar solo en extremo */
-  padding: 2px 4px;
 }
 
-  .posicion-ideal label {
-    display: none;
+.posicion-ideal img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%; /* 🔹 Mantiene solo la cara en círculo */
+  object-fit: cover;
+  border: none; /* ❌ Sin contorno */
 }
-  .posicion-ideal span {
-    font-weight: 600;
-  }
+
+.posicion-ideal span {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white; /* 🔹 Apellido en blanco */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8); /* mejor contraste sobre césped */
+}
+
+/* Oculta los labels de posición (Vol1, Vol2, etc.) */
+.posicion-ideal label,
+.posicion-ideal .posicion-texto {
+  display: none !important;
+}
+
 
   #equipos-firebase {
   display: grid;
@@ -497,7 +513,7 @@
 }
 
 .equipo-container {
-  background: #f9f9f9;
+  background: #ffffff;
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 1rem;
@@ -651,7 +667,7 @@
 }
 
 details {
-  background-color: #0033a0; /* Azul Boca */
+  background-color: #010efd; /* Azul Boca */
   border: 2px solid #ffcc00; /* Borde amarillo */
   border-radius: 8px;
   padding: 10px;
@@ -747,7 +763,7 @@ details[open] summary::before {
   padding: 2px;             /* Reduce espacio interno */
   width: 55px;              /* Más compacto */
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px hsl(0, 0%, 0%);
 }
 
 .carta-jugador img.foto-jugador {
@@ -763,7 +779,7 @@ details[open] summary::before {
 .carta-jugador .nombre-jugador {
   font-weight: bold;
   font-size: 0.65em;
-  color: #00215E;
+  color: #f5f4f2;
   margin-bottom: 1px;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -773,7 +789,7 @@ details[open] summary::before {
 
 .carta-jugador label {
   font-size: 0.6em;
-  color: #333;
+  color: #0f0b0b;
 }
 
 /* Ajuste para móviles */
