@@ -224,17 +224,17 @@
     align-items: center;
   }
 
-  .info-partido {
-  background-color: #0033a0; /* azul más intenso */
-  padding: 10px;
-  border-radius: 8px;
-  color: rgb(210, 171, 0);
-  font-family: 'Montserrat', sans-serif; /* ← nueva fuente */
-  font-weight: 600;        /* un poco menos que 700 si querés que no grite tanto */
-  font-size: 1.1em;        /* un poco más grande para destacar */
+ .info-partido {
+  background-color: #f4d108; /* azul intenso */
+  padding: 4px 6px;         /* 🔽 menos padding → menos alto */
+  border-radius: 4px;       /* 🔽 esquinas un poco más chicas */
+  color: rgb(9, 30, 226);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;         /* 🔽 menos pesado → menos "grita" */
+  font-size: 0.8em;        /* 🔽 más chico para compactar */
   text-align: center;
-  margin-bottom: 1rem;
-  line-height: 1.5;        /* mejora la lectura */
+  margin-bottom: 0.3rem;    /* 🔽 menos espacio debajo */
+  line-height: 1.1;         /* 🔽 reduce el espacio entre líneas */
 }
 
   /* Mini-cancha */
