@@ -452,17 +452,32 @@
   }
 
   #cancha-ideal .posicion-ideal {
-    transform: translate(-50%, -50%) scale(1.8); /* aumenta tamaño de la carta */
+    transform: translate(-50%, -50%) scale(1.4);
     max-width: none;
     min-width: fit-content;
-    font-size: 0;         /* oculta el texto */
-    padding: 0;           /* elimina padding del texto */
-    margin: 5px;            /* separa cartas entre sí */
-    z-index: 10;            /* para que no queden debajo de otras cartas */
+    font-size: inherit;
+    padding: 0;
+    margin: 5px;
+    z-index: 10;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
   #cancha-ideal .posicion-ideal span {
-    display: none;        /* asegura que el nombre no aparezca */
+    display: block;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
+    margin-top: 2px;
+
+    /* 🔑 Lo importante para que no aparezca L.. */
+    white-space: normal !important; /* permite varias líneas si es necesario */
+    overflow: visible !important;
+    text-overflow: clip !important;
+    max-width: 90px; /* da espacio para el apellido */
+    word-break: break-word; /* si es muy largo, lo corta en dos líneas */
   }
 }
 
@@ -503,6 +518,7 @@
 .posicion-ideal .posicion-texto {
   display: none !important;
 }
+
 
 
   #equipos-firebase {
@@ -801,6 +817,8 @@ details[open] summary::before {
     font-size: 0.6em;  /* un poco más chica para que entre */
   }
 }
+
+
 
 
 
