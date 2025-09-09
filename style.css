@@ -800,13 +800,12 @@ details[open] summary::before {
   margin-bottom: 4px;
 }
 
-
 .carta-jugador .nombre-jugador {
   font-weight: bold;
   font-size: 0.65em;
   color: #f5f4f2;
   margin-bottom: 1px;
-  white-space: nowrap;
+  white-space: nowrap;       /* mantener en desktop */
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 100%;
@@ -822,10 +821,15 @@ details[open] summary::before {
   .carta-jugador {
     width: 80px;       /* más espacio en móviles */
   }
+
   .carta-jugador .nombre-jugador {
-    font-size: 0.6em;  /* un poco más chica para que entre */
+    font-size: 0.6em;      /* un poco más chica para que entre */
+    white-space: normal;   /* permite que el texto se divida en varias líneas */
+    overflow: visible;     /* deja que se muestre completo */
+    text-overflow: unset;  /* elimina la elipsis */
   }
 }
+
 
 
 /* Contenedor principal */
