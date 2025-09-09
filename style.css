@@ -969,7 +969,7 @@ details[open] summary::before {
 /* Camiseta de Boca en cada posición */
 .camiseta-posicion {
   position: absolute;
-  top: 40%;            /* más arriba para no tapar label/select */
+  top: 10%;            /* más arriba para no tapar label/select */
   left: 50%;
   width: 60px;         /* tamaño desktop */
   height: 100px;
