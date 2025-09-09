@@ -743,13 +743,12 @@ equipoTop.jugadores.forEach((jugador, i) => {
     const esMobile = window.innerWidth <= 480;
 
     divPos.innerHTML = `
-      <div class="carta-jugador">
-        <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
-        ${esMobile 
-          ? `<div class="nombre-jugador">${jugador}</div>` 
-          : `<div class="nombre-jugador">${obtenerApellido(jugador)}</div>`}
-      </div>
-    `;
+  <div class="carta-jugador">
+    <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
+    <div class="nombre-jugador">${obtenerApellido(jugador)}</div>
+  </div>
+`;
+
 
   canchaIdeal.appendChild(divPos);
 });
