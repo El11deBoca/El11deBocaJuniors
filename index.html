@@ -106,9 +106,9 @@
 
 <details>
   <summary>Datos del partido</summary>
-  <p>No jugará: Pellegrino</p>
-  <p>No jugará: Belmonte</p>
-  <p>No jugará: Marchesin</p>
+  <p>No jugará: Pellegrino(Lesión)</p>
+  <p>No jugará: Marchesin(Lesión)</p>
+  <p>No jugará: Zenón(siendo negociado)</p>
 </details>
 
 
@@ -140,6 +140,8 @@
   </div>
 
   <div id="cancha-ideal"></div>
+  
+    
 </div>
 
 
@@ -311,6 +313,24 @@
     cancha.innerHTML = "";
 
     if (!formacion) return;
+     // Áreas grandes
+      const areaSuperior = document.createElement("div");
+       areaSuperior.className = "area-superior";
+       cancha.appendChild(areaSuperior);
+
+      const areaInferior = document.createElement("div");
+       areaInferior.className = "area-inferior";
+       cancha.appendChild(areaInferior);
+
+// Áreas chicas
+      const chicaSuperior = document.createElement("div");
+       chicaSuperior.className = "chica-superior";
+       cancha.appendChild(chicaSuperior);
+
+      const chicaInferior = document.createElement("div");
+       chicaInferior.className = "chica-inferior";
+      cancha.appendChild(chicaInferior);
+
 
     const posiciones = formaciones[formacion];
     if (!posiciones) return;
@@ -320,6 +340,14 @@
       divPos.className = "posicion";
       divPos.style.top = pos.top + "%";
       divPos.style.left = pos.left + "%";
+
+      
+  // Imagen de camiseta
+      const imgCamiseta = document.createElement("img");
+        imgCamiseta.src = "img/camisetas/camisetaBoca_2025.png"; // tu ruta
+        imgCamiseta.alt = "Camiseta";
+        imgCamiseta.className = "camiseta-posicion";
+      divPos.appendChild(imgCamiseta);
 
       // Label posición
       const label = document.createElement("label");
@@ -665,6 +693,24 @@ function mostrarOnceIdeal(equipos) {
   }
 
   canchaIdeal.innerHTML = ""; // limpio antes
+  // Agregar áreas de la cancha
+const areaSuperior = document.createElement("div");
+areaSuperior.className = "area-superior";
+canchaIdeal.appendChild(areaSuperior);
+
+const areaInferior = document.createElement("div");
+areaInferior.className = "area-inferior";
+canchaIdeal.appendChild(areaInferior);
+
+// Si querés también las áreas chicas (opcional)
+const chicaSuperior = document.createElement("div");
+chicaSuperior.className = "chica-superior";
+canchaIdeal.appendChild(chicaSuperior);
+
+const chicaInferior = document.createElement("div");
+chicaInferior.className = "chica-inferior";
+canchaIdeal.appendChild(chicaInferior);
+
 
   
   const posicionesBase = formaciones[equipoTop.formacion];
@@ -697,13 +743,12 @@ equipoTop.jugadores.forEach((jugador, i) => {
     const esMobile = window.innerWidth <= 480;
 
     divPos.innerHTML = `
-      <div class="carta-jugador">
-        <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
-        ${esMobile 
-          ? `<div class="nombre-jugador">${jugador}</div>` 
-          : `<div class="nombre-jugador">${obtenerApellido(jugador)}</div>`}
-      </div>
-    `;
+  <div class="carta-jugador">
+    <img src="${urlFoto}" alt="${jugador}" class="foto-jugador">
+    <div class="nombre-jugador">${obtenerApellido(jugador)}</div>
+  </div>
+`;
+
 
   canchaIdeal.appendChild(divPos);
 });

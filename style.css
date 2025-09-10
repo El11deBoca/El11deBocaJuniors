@@ -496,6 +496,7 @@ header {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  z-index: 10;
 }
 
 .posicion-ideal img {
@@ -505,6 +506,14 @@ header {
   object-fit: cover;
   border: none; /* ❌ Sin contorno */
 }
+.posicion-ideal img {
+  width: 80px;   /* antes 55px */
+  height: 80px;  /* antes 55px */
+  border-radius: 50%;
+  object-fit: cover;
+  border: none;
+}
+
 
 .posicion-ideal span {
   margin-top: 4px;
@@ -789,21 +798,20 @@ details[open] summary::before {
 }
 
 .carta-jugador img.foto-jugador {
-  width: 60px;   /* antes 70px */
-  height: 60px;
+  width: 40px;   /* antes 70px */
+  height: 40px;
   border-radius: 50%;
   object-fit: contain; /* cambia cover por contain para no recortar */
   object-position: center;
   margin-bottom: 4px;
 }
 
-
 .carta-jugador .nombre-jugador {
   font-weight: bold;
   font-size: 0.65em;
   color: #f5f4f2;
   margin-bottom: 1px;
-  white-space: nowrap;
+  white-space: nowrap;       /* mantener en desktop */
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 100%;
@@ -827,13 +835,10 @@ details[open] summary::before {
   }
 
   .carta-jugador .nombre-jugador {
-    display: none;       /* ocultamos los nombres */
-  }
-
-  .carta-jugador label {
-    font-size: 0.8em;    /* opcional: etiqueta más clara */
+    font-size: 0.6em;  /* un poco más chica para que entre */
   }
 }
+
 
 
 /* Contenedor principal */
@@ -898,9 +903,122 @@ details[open] summary::before {
 
 
 
+/* Áreas grandes */
+#cancha .area-superior,
+#cancha .area-inferior {
+  position: absolute;
+  left: 25%;        /* centradas en el ancho de la cancha */
+  width: 50%;       /* ancho del área grande */
+  height: 20%;      /* alto del área grande */
+  border: 2px solid white;
+}
 
+#cancha .area-superior {
+  top: 0;
+  border-top: none;
+}
 
+#cancha .area-inferior {
+  bottom: 0;
+  border-bottom: none;
+}
 
+/* Áreas chicas */
+#cancha .chica-superior,
+#cancha .chica-inferior {
+  position: absolute;
+  left: 37%;       /* más angostas que el área grande */
+  width: 26%;
+  height: 8%;
+  border: 2px solid white;
+}
 
+#cancha .chica-superior {
+  top: 0;
+  border-top: none;
+}
 
+#cancha .chica-inferior {
+  bottom: 0;
+  border-bottom: none;
+}
 
+/* Áreas grandes */
+#cancha-ideal .area-superior,
+#cancha-ideal .area-inferior {
+  position: absolute;
+  left: 25%;        /* centradas en el ancho */
+  width: 50%;       /* ancho del área grande */
+  height: 20%;      /* alto del área grande */
+  border: 2px solid white;
+}
+
+#cancha-ideal .area-superior {
+  top: 0;
+  border-top: none;
+}
+
+#cancha-ideal .area-inferior {
+  bottom: 0;
+  border-bottom: none;
+}
+
+/* Áreas chicas */
+#cancha-ideal .chica-superior,
+#cancha-ideal .chica-inferior {
+  position: absolute;
+  left: 37%;       /* más angostas */
+  width: 26%;
+  height: 8%;
+  border: 2px solid white;
+}
+
+#cancha-ideal .chica-superior {
+  top: 0;
+  border-top: none;
+}
+
+#cancha-ideal .chica-inferior {
+  bottom: 0;
+  border-bottom: none;
+}
+
+/* Camiseta de Boca en cada posición */
+.camiseta-posicion {
+  position: absolute;
+  top: 10%;            /* más arriba para no tapar label/select */
+  left: 50%;
+  width: 60px;         /* tamaño desktop */
+  height: 100px;
+  transform: translate(-50%, -50%);
+  z-index: 1;          /* detrás de label y select */
+  pointer-events: none; /* no interfiere con clicks */
+}
+
+/* Ajusta label y select para estar por encima */
+.posicion label,
+.posicion select {
+  position: relative;
+  z-index: 2;          /* encima de la camiseta */
+  display: block;
+  text-align: center;
+  margin-top: 2px;
+}
+
+/* Responsive: para pantallas pequeñas */
+@media (max-width: 480px) {
+  .camiseta-posicion {
+    width: 45px;
+    height: 45px;
+    top: 35%;           /* sube un poco más en mobile */
+  }
+
+  .posicion select {
+    font-size: 0.7em;
+    width: 70px;
+  }
+
+  .posicion label {
+    font-size: 0.65em;
+  }
+}
