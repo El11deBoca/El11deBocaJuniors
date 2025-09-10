@@ -10,7 +10,7 @@
   min-height: 100vh;
 }
 
-  header {
+header {
   background-color: #F5B041;
   color: #00215E;
   padding: 15px;
@@ -18,9 +18,12 @@
   font-size: 1.8em;
   width: 100%;
   text-align: center;
-
   font-family: 'Impact', 'Arial Black', sans-serif
-}
+
+  }
+
+
+
 
   #datos-partido {
     background-color: #001B3D;
@@ -424,6 +427,10 @@
   transform: translateX(-50%);
 }
 
+/* ------------------------- */
+/* POSICIÓN IDEAL - CANCHA   */
+/* ------------------------- */
+
 /* Media query para pantallas muy pequeñas */
 @media (max-width: 480px) {
   #cancha-ideal {
@@ -452,33 +459,27 @@
   }
 
   #cancha-ideal .posicion-ideal {
-    transform: translate(-50%, -50%) scale(1.4);
-    max-width: none;
-    min-width: fit-content;
-    font-size: inherit;
-    padding: 0;
-    margin: 5px;
-    z-index: 10;
+    position: absolute;
+    display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
+    transform: translate(-50%, -50%);
+    min-width: max-content;   /* 🔑 el contenedor se adapta al apellido */
+}
 
-  #cancha-ideal .posicion-ideal span {
-    display: block;
-    color: white;
+#cancha-ideal .posicion-ideal span {
+    margin-top: 4px;
     font-size: 0.75rem;
     font-weight: 700;
+    color: white;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.9);
-    margin-top: 2px;
 
-    /* 🔑 Lo importante para que no aparezca L.. */
-    white-space: normal !important; /* permite varias líneas si es necesario */
-    overflow: visible !important;
-    text-overflow: clip !important;
-    max-width: 90px; /* da espacio para el apellido */
-    word-break: break-word; /* si es muy largo, lo corta en dos líneas */
-  }
+    white-space: nowrap;      /* 🔑 no se parte en varias líneas */
+    overflow: visible !important; /* 🔑 nunca lo corta */
+}
+
+
 }
 
 
@@ -511,6 +512,9 @@
   font-weight: 700;
   color: white; /* 🔹 Apellido en blanco */
   text-shadow: 0 1px 3px rgba(0,0,0,0.8); /* mejor contraste sobre césped */
+  white-space: nowrap; /* en escritorio, apellido en una línea */
+  overflow: visible;
+  text-overflow: clip;
 }
 
 /* Oculta los labels de posición (Vol1, Vol2, etc.) */
@@ -518,6 +522,8 @@
 .posicion-ideal .posicion-texto {
   display: none !important;
 }
+
+
 
 
 
@@ -783,8 +789,8 @@ details[open] summary::before {
 }
 
 .carta-jugador img.foto-jugador {
-  width: 40px;   /* antes 70px */
-  height: 40px;
+  width: 60px;   /* antes 70px */
+  height: 60px;
   border-radius: 50%;
   object-fit: contain; /* cambia cover por contain para no recortar */
   object-position: center;
@@ -811,10 +817,21 @@ details[open] summary::before {
 /* Ajuste para móviles */
 @media (max-width: 600px) {
   .carta-jugador {
-    width: 80px;       /* más espacio en móviles */
+    width: 120px;        /* más grande la carta */
+    padding: 4px;
   }
+
+  .carta-jugador img.foto-jugador {
+    width: 100px;        /* agrandamos el avatar */
+    height: 100px;
+  }
+
   .carta-jugador .nombre-jugador {
-    font-size: 0.6em;  /* un poco más chica para que entre */
+    display: none;       /* ocultamos los nombres */
+  }
+
+  .carta-jugador label {
+    font-size: 0.8em;    /* opcional: etiqueta más clara */
   }
 }
 
@@ -876,6 +893,10 @@ details[open] summary::before {
   font-size: 0.9em;
   color: #ccc;
 }
+
+
+
+
 
 
 
