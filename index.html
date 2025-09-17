@@ -68,17 +68,17 @@
 <div id="historial-partidos">
   <div class="equipo equipo-boca">
     <img src="img/escudos/boca.png" alt="Boca Juniors">
-    <div class="circulo victorias-boca">80</div>
+    <div class="circulo victorias-boca">8</div>
   </div>
 
   <div class="equipo empates">
-    <div class="circulo empates-circulo">26</div>
+    <div class="circulo empates-circulo">2</div>
     <span>Empates</span>
   </div>
 
   <div class="equipo equipo-rival">
-    <img src="img/escudos/central.png" alt="Rival">
-    <div class="circulo victorias-rival">43</div>
+    <img src="img/escudos/centralcordoba.png" alt="Rival">
+    <div class="circulo victorias-rival">2</div>
   </div>
 </div>
 
@@ -106,9 +106,9 @@
 
 <details>
   <summary>Datos del partido</summary>
-  <p>No jugará: Pellegrino(Lesión)</p>
-  <p>No jugará: Marchesin(Lesión)</p>
-  <p>No jugará: Zenón(siendo negociado)</p>
+  <p></p>
+  <p>No jugará: Marchesin</p>
+  <p>No jugará: Zenón</p>
 </details>
 
 
@@ -201,28 +201,28 @@
 
   const formaciones = {
     "4-3-3": [
-      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
-      { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
-      { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
-      { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
-      { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
-      { label: "VOL 1", tipo: "VOL", top: 50, left: 30 },
-      { label: "VOL 2", tipo: "VOL", top: 50, left: 50 },
-      { label: "VOL 3", tipo: "VOL", top: 50, left: 70 },
-      { label: "DEL 1", tipo: "DEL", top: 25, left: 25 },
+      { label: "ARQ 1", tipo: "ARQ", top: 95, left: 50 },
+      { label: "DEF 1", tipo: "DEF", top: 80, left: 10 },
+      { label: "DEF 2", tipo: "DEF", top: 80, left: 35 },
+      { label: "DEF 3", tipo: "DEF", top: 80, left: 65 },
+      { label: "DEF 4", tipo: "DEF", top: 80, left: 90 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 20 },
+      { label: "VOL 2", tipo: "VOL", top: 60, left: 50 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 80 },
+      { label: "DEL 1", tipo: "DEL", top: 25, left: 10 },
       { label: "DEL 2", tipo: "DEL", top: 25, left: 50 },
-      { label: "DEL 3", tipo: "DEL", top: 25, left: 75 },
+      { label: "DEL 3", tipo: "DEL", top: 25, left: 90 },
     ],
     "4-4-2": [
       { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
-      { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
-      { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
-      { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
-      { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
-      { label: "VOL 1", tipo: "VOL", top: 50, left: 20 },
-      { label: "VOL 2", tipo: "VOL", top: 50, left: 40 },
-      { label: "VOL 3", tipo: "VOL", top: 50, left: 60 },
-      { label: "VOL 4", tipo: "VOL", top: 50, left: 80 },
+      { label: "DEF 1", tipo: "DEF", top: 70, left: 10 },
+      { label: "DEF 2", tipo: "DEF", top: 70, left: 35 },
+      { label: "DEF 3", tipo: "DEF", top: 70, left: 65 },
+      { label: "DEF 4", tipo: "DEF", top: 70, left: 90 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 10 },
+      { label: "VOL 2", tipo: "VOL", top: 50, left: 35 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 65 },
+      { label: "VOL 4", tipo: "VOL", top: 50, left: 90 },
       { label: "DEL 1", tipo: "DEL", top: 25, left: 35 },
       { label: "DEL 2", tipo: "DEL", top: 25, left: 65 },
     ],
@@ -233,50 +233,50 @@
       { label: "DEF 3", tipo: "DEF", top: 70, left: 50 },
       { label: "DEF 4", tipo: "DEF", top: 70, left: 70 },
       { label: "DEF 5", tipo: "DEF", top: 70, left: 90 },
-      { label: "VOL 1", tipo: "VOL", top: 50, left: 25 },
-      { label: "VOL 2", tipo: "VOL", top: 50, left: 45 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 10 },
+      { label: "VOL 2", tipo: "VOL", top: 50, left: 35 },
       { label: "VOL 3", tipo: "VOL", top: 50, left: 65 },
-      { label: "VOL 4", tipo: "VOL", top: 50, left: 85 },
+      { label: "VOL 4", tipo: "VOL", top: 50, left: 90 },
       { label: "DEL 1", tipo: "DEL", top: 25, left: 50 },
     ],
     "4-3-1-2": [
-      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
-      { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
-      { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
-      { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
-      { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
-      { label: "VOL 1", tipo: "VOL", top: 50, left: 30 },
-      { label: "VOL 2", tipo: "VOL", top: 50, left: 50 },
-      { label: "VOL 3", tipo: "VOL", top: 50, left: 70 },
+      { label: "ARQ 1", tipo: "ARQ", top: 95, left: 50 },
+      { label: "DEF 1", tipo: "DEF", top: 80, left: 10 },
+      { label: "DEF 2", tipo: "DEF", top: 80, left: 35 },
+      { label: "DEF 3", tipo: "DEF", top: 80, left: 65 },
+      { label: "DEF 4", tipo: "DEF", top: 80, left: 90 },
+      { label: "VOL 1", tipo: "VOL", top: 50, left: 20 },
+      { label: "VOL 2", tipo: "VOL", top: 60, left: 50 },
+      { label: "VOL 3", tipo: "VOL", top: 50, left: 80 },
       { label: "VOL 4", tipo: "VOL", top: 30, left: 50 }, // El 1 volante ofensivo
-      { label: "DEL 1", tipo: "DEL", top: 25, left: 35 },
-      { label: "DEL 2", tipo: "DEL", top: 25, left: 65 },
+      { label: "DEL 1", tipo: "DEL", top: 15, left: 35 },
+      { label: "DEL 2", tipo: "DEL", top: 15, left: 65 },
     ],
     "4-2-3-1": [
-     { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
-     { label: "DEF 1", tipo: "DEF", top: 70, left: 20 },
-     { label: "DEF 2", tipo: "DEF", top: 70, left: 40 },
-     { label: "DEF 3", tipo: "DEF", top: 70, left: 60 },
-     { label: "DEF 4", tipo: "DEF", top: 70, left: 80 },
+     { label: "ARQ 1", tipo: "ARQ", top: 95, left: 50 },
+     { label: "DEF 1", tipo: "DEF", top: 75, left: 10 },
+     { label: "DEF 2", tipo: "DEF", top: 75, left: 35 },
+     { label: "DEF 3", tipo: "DEF", top: 75, left: 65 },
+     { label: "DEF 4", tipo: "DEF", top: 75, left: 90 },
      { label: "VOL 1", tipo: "VOL", top: 55, left: 35 },
      { label: "VOL 2", tipo: "VOL", top: 55, left: 65 },
-     { label: "VOL 3", tipo: "VOL", top: 40, left: 25 },
-     { label: "VOL 4", tipo: "VOL", top: 40, left: 50 },
-     { label: "VOL 5", tipo: "VOL", top: 40, left: 75 },
-     { label: "DEL 1", tipo: "DEL", top: 20, left: 50 }
+     { label: "VOL 3", tipo: "VOL", top: 35, left: 25 },
+     { label: "VOL 4", tipo: "VOL", top: 35, left: 50 },
+     { label: "VOL 5", tipo: "VOL", top: 35, left: 75 },
+     { label: "DEL 1", tipo: "DEL", top: 15, left: 50 }
     ],
     "3-4-3": [
      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
-     { label: "DEF 1", tipo: "DEF", top: 70, left: 35 },
+     { label: "DEF 1", tipo: "DEF", top: 70, left: 25 },
      { label: "DEF 2", tipo: "DEF", top: 70, left: 50 },
-     { label: "DEF 3", tipo: "DEF", top: 70, left: 65 },
-     { label: "VOL 1", tipo: "VOL", top: 50, left: 20 },
-     { label: "VOL 2", tipo: "VOL", top: 50, left: 40 },
-     { label: "VOL 3", tipo: "VOL", top: 50, left: 60 },
-     { label: "VOL 4", tipo: "VOL", top: 50, left: 80 },
-     { label: "DEL 1", tipo: "DEL", top: 25, left: 30 },
+     { label: "DEF 3", tipo: "DEF", top: 70, left: 75 },
+     { label: "VOL 1", tipo: "VOL", top: 50, left: 10 },
+     { label: "VOL 2", tipo: "VOL", top: 50, left: 35 },
+     { label: "VOL 3", tipo: "VOL", top: 50, left: 65 },
+     { label: "VOL 4", tipo: "VOL", top: 50, left: 90 },
+     { label: "DEL 1", tipo: "DEL", top: 25, left: 25 },
      { label: "DEL 2", tipo: "DEL", top: 25, left: 50 },
-     { label: "DEL 3", tipo: "DEL", top: 25, left: 70 }
+     { label: "DEL 3", tipo: "DEL", top: 25, left: 75 }
      ],
      "5-3-2": [
      { label: "ARQ 1", tipo: "ARQ", top: 90, left: 50 },
@@ -371,6 +371,7 @@
         const opt = document.createElement("option");
         opt.value = jug;
         opt.textContent = jug;
+
         select.appendChild(opt);
       });
 
