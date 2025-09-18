@@ -698,7 +698,7 @@ header {
 }
 
 details {
-  background-color: #010efd; /* Azul Boca */
+  background-color: #000450; /* Azul Boca */
   border: 2px solid #ffcc00; /* Borde amarillo */
   border-radius: 8px;
   padding: 10px;
@@ -902,7 +902,6 @@ details[open] summary::before {
   font-size: 0.9em;
   color: #ccc;
 }
-
 
 
 
