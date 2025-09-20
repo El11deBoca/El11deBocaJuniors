@@ -366,6 +366,13 @@ header {
   text-transform: uppercase; /* MAYÚSCULAS para que quede más deportivo */
 }
 
+#once-ideal h3 {
+  text-align: center;
+  font-weight: normal; /* opcional, si no lo querés tan marcado */
+  margin-top: 5px;     /* podés ajustar el espacio */
+  color: #F5B041; 
+}
+
 
 #cancha-ideal {
   width: 100%;
@@ -401,7 +408,7 @@ header {
 
 /* Texto superior (ej: web) */
 #cancha-ideal::after {
-  content: "WWW.TUONCEXENEIZE.COM- armá y votá tu equipo ideal";
+  content: "";
   position: absolute;
   top: 2%;
   left: 50%;
@@ -798,8 +805,8 @@ details[open] summary::before {
 }
 
 .carta-jugador img.foto-jugador {
-  width: 60px;   /* antes 70px */
-  height: 60px;
+  width: 90px;   /* antes 70px */
+  height: 90px;
   border-radius: 50%;
   object-fit: contain; /* cambia cover por contain para no recortar */
   object-position: center;
