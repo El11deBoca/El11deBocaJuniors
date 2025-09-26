@@ -243,7 +243,7 @@ header {
   /* Mini-cancha */
 .mini-cancha {
     position: relative;
-    background: linear-gradient(90deg, #004080, #003060);
+    background: linear-gradient(90deg, #006121c5, #013c15c5);
     border: 2px solid #F5B041;
     border-radius: 10px;
     width: 300px;
@@ -264,7 +264,7 @@ header {
 }
 
 .mini-cancha .jugador {
-    background-color: #FFD700;
+    background-color: #150075;
     border-radius: 50%;
     width: 28px;
     height: 28px;
@@ -278,7 +278,7 @@ header {
 }
 
 .mini-cancha::after {
-  content: "www.tuoncexeneize.com";
+  content: "";
   position: absolute;
   top: 5px;
   left: 50%;
@@ -291,7 +291,7 @@ header {
 
   .mini-posicion {
   position: absolute;
-  background-color: #F5B041;
+  background-color: #003c1782;
   color: #00215E;
   border-radius: 6px;
   padding: 4px 6px;
@@ -306,6 +306,7 @@ header {
   text-align: center;
   transform: translate(-50%, -50%);
 }
+
 
 
   .mini-posicion label {
@@ -540,9 +541,6 @@ header {
 }
 
 
-
-
-
   #equipos-firebase {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -605,7 +603,7 @@ header {
 }
 
 .equipo-container {
-  background: #0033a0; /* Azul Boca */
+  background: #0e015d; /* Azul Boca */
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 1rem;
@@ -801,7 +799,7 @@ details[open] summary::before {
   padding: 2px;             /* Reduce espacio interno */
   width: 55px;              /* Más compacto */
   text-align: center;
-  box-shadow: 0 2px 4px hsl(0, 0%, 0%);
+  box-shadow: none !important;        /* 🔥 elimina sombra */
 }
 
 .carta-jugador img.foto-jugador {
@@ -811,6 +809,8 @@ details[open] summary::before {
   object-fit: contain; /* cambia cover por contain para no recortar */
   object-position: center;
   margin-bottom: 4px;
+  background: transparent !important; /* 🔥 asegura PNG sin fondo */
+  object-fit: contain;                /* para que no recorte silueta */
 }
 
 .carta-jugador .nombre-jugador {
@@ -909,7 +909,6 @@ details[open] summary::before {
   font-size: 0.9em;
   color: #ccc;
 }
-
 
 
 
@@ -1032,3 +1031,43 @@ details[open] summary::before {
     font-size: 0.65em;
   }
 }
+
+.mini-carta-jugador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #013c15c5 !important; /* fondo azul uniforme */
+  padding: 2px;
+  width: 55px;
+  text-align: center;
+  border-radius: 4px; /* 🔹 bordes suaves, no círculo */
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.mini-carta-jugador img.mini-foto-jugador {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;         /* círculo, pero sin recorte */
+  object-fit: contain;        /* mantiene la imagen completa dentro */
+  object-position: center;
+  margin: 0;
+  background: transparent !important;
+  border: none !important;
+}
+
+
+.mini-carta-jugador .mini-nombre-jugador {
+  margin-top: 4px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  white-space: nowrap;
+}
+
+
+
+
+
+
