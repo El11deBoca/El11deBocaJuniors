@@ -22,7 +22,28 @@ header {
 
   }
 
+.titulo-principal {
+  text-align: center;
+  margin-top: 15px;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+}
 
+.titulo-principal h1 {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #06080a; /* Azul Boca */
+  text-shadow: 3px 3px 0 #fcbf00, 5px 5px 0 #000000; /* Amarillo y un toque de sombra negra */
+  letter-spacing: 2px;
+}
+
+.titulo-principal p {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: #f7ae03; /* Amarillo Boca */
+  text-shadow: 2px 2px 0 #0033a0, 4px 4px 0 #000000; /* Azul y sombra negra */
+  letter-spacing: 1px;
+}
 
 
   #datos-partido {
@@ -206,7 +227,7 @@ header {
     gap: 30px;
   }
   #equipos-enviados h2 {
-    color: #F5B041;
+    color: #cad101;
     width: 100%;
     margin-top: 0;
     margin-bottom: 25px;
@@ -228,10 +249,10 @@ header {
   }
 
  .info-partido {
-  background-color: #f4d108; /* azul intenso */
+  background-color: #00105f; /* azul intenso */
   padding: 4px 6px;         /* 🔽 menos padding → menos alto */
   border-radius: 4px;       /* 🔽 esquinas un poco más chicas */
-  color: rgb(9, 30, 226);
+  color: rgb(211, 226, 9);
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;         /* 🔽 menos pesado → menos "grita" */
   font-size: 0.8em;        /* 🔽 más chico para compactar */
@@ -243,13 +264,13 @@ header {
   /* Mini-cancha */
 .mini-cancha {
     position: relative;
-    background: linear-gradient(90deg, #006121c5, #013c15c5);
+    background: linear-gradient(90deg, #00720082, #00640082);
     border: 2px solid #F5B041;
     border-radius: 10px;
     width: 300px;
     height: 260px; /* Aumentamos altura */
     margin-bottom: 15px;
-    box-shadow: 0 0 8px #F5B041AA;
+    box-shadow: 0 0 8px #aea802aa;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -285,14 +306,14 @@ header {
   transform: translateX(-50%);
   font-size: 14px;
   font-weight: bold;
-  color: rgba(255, 215, 0, 0.85); /* Amarillo dorado con leve transparencia */
+  color: rgba(242, 255, 0, 0.85); /* Amarillo dorado con leve transparencia */
   pointer-events: none; /* No molesta */
 }
 
   .mini-posicion {
   position: absolute;
-  background-color: #003c1782;
-  color: #00215E;
+  background-color: #003a0082;
+  color: #00065e;
   border-radius: 6px;
   padding: 4px 6px;
   font-size: 0.7em;
@@ -571,36 +592,19 @@ header {
   cursor: pointer;
   border-radius: 5px;
   margin-top: 10px;
-  transition:  0.3s ease;
+  transition: 0.3s ease;
   user-select: none;
+
+  /* Fix alineación dentro de flex-column */
+  align-self: center; /* fuerza al botón a estar centrado horizontalmente */
 }
+
 
 .boton-me-gusta:hover {
   background: linear-gradient(90deg, #00277A 0%, #FFB800 100%);
 }
 
-.titulo-principal {
-  text-align: center;
-  margin-top: 15px;
-  font-family: 'Impact', 'Arial Black', sans-serif;
-}
 
-.titulo-principal h1 {
-  font-size: 3em;
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #06080a; /* Azul Boca */
-  text-shadow: 3px 3px 0 #fcbf00, 5px 5px 0 #000000; /* Amarillo y un toque de sombra negra */
-  letter-spacing: 2px;
-}
-
-.titulo-principal p {
-  font-size: 1.3em;
-  font-weight: bold;
-  color: #f7ae03; /* Amarillo Boca */
-  text-shadow: 2px 2px 0 #0033a0, 4px 4px 0 #000000; /* Azul y sombra negra */
-  letter-spacing: 1px;
-}
 
 .equipo-container {
   background: #0e015d; /* Azul Boca */
@@ -609,6 +613,9 @@ header {
   padding: 1rem;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   color: #ffcc00; /* Amarillo Boca */
+  display: flex;
+  flex-direction: column;  /* columnas: info, mini cancha, botón */
+  align-items: center;     /* centra horizontalmente todos los hijos */
 }
 
 .boton-compartir {
@@ -1036,7 +1043,7 @@ details[open] summary::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #013c15c5 !important; /* fondo azul uniforme */
+  background-color: #003a0082 !important; /* fondo azul uniforme */
   padding: 2px;
   width: 55px;
   text-align: center;
@@ -1048,7 +1055,7 @@ details[open] summary::before {
 .mini-carta-jugador img.mini-foto-jugador {
   width: 50px;
   height: 50px;
-  border-radius: 50%;         /* círculo, pero sin recorte */
+  border-radius: 100%;         /* círculo, pero sin recorte */
   object-fit: contain;        /* mantiene la imagen completa dentro */
   object-position: center;
   margin: 0;
