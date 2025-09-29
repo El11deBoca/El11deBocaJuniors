@@ -264,7 +264,7 @@ header {
   /* Mini-cancha */
 .mini-cancha {
     position: relative;
-    background: linear-gradient(90deg, #00720082, #00640082);
+    background: linear-gradient(90deg, #003d00de, #00640082);
     border: 2px solid #F5B041;
     border-radius: 10px;
     width: 300px;
